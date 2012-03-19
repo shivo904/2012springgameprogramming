@@ -64,7 +64,7 @@ namespace SideScrollShooter
                                 currentFrame.Y * frameSize.Y,
                                 frameSize.X,frameSize.Y),
                                 Color.White, 0, Vector2.Zero, 1f, 
-                                SpriteEffects.None, 0));
+                                SpriteEffects.None, 0);
 
         }
 
