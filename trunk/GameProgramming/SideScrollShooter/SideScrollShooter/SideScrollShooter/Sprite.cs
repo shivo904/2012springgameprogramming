@@ -9,6 +9,7 @@ namespace SideScrollShooter
 {
     abstract class Sprite
     {
+        int temp;
         private Texture2D textureImage;
         private Point frameSize;
         private Point currentFrame;
