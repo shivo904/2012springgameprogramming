@@ -19,8 +19,10 @@ namespace SideScrollShooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteManager spriteManager;
+        public Random rnd { get; private set; }
         public Game1()
         {
+            rnd = new Random();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
