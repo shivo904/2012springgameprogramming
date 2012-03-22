@@ -1,32 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-
+/*
+ * The basic sprite class for my game
+ */
 namespace SideScrollShooter
 {
     abstract class Sprite
     {
-        private Texture2D textureImage;
-        private Point frameSize;
-        private Point currentFrame;
-        private Point sheetSize;
-        private int collisionOffset;
-        private int timeSinceLastFrame = 0;
-        private int millisecondsPerFrame;
-        private const int defaultMillisecondsPerFrame = 16;
-        private Vector2 speed;
-        private Vector2 position;
-       
-        public Sprite(Texture2D textureImage,Vector2 position, Point frameSize,int collisionOffset,
-            Point currentFrame, Point sheetSize,Vector2 speed)
-            :this(textureImage, position,frameSize,collisionOffset,currentFrame,sheetSize,speed,defaultMillisecondsPerFrame)
+        Texture2D textureImage;
+        public Point frameSize;
+        Point currentFrame;
+        Point sheetSize;
+        int collisionOffset;
+        int timeSinceLastFrame = 0;
+        int millisecondsPerFrame;
+        const int defaultMillisecondsPerFrame = 16;
+        protected Vector2 speed;
+        public Vector2 position;
+
+        public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,
+            int collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed)
+            : this(textureImage, position, frameSize, collisionOffset, currentFrame,
+            sheetSize, speed, defaultMillisecondsPerFrame)
         {
         }
-        public Sprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset,
-            Point currentFrame, Point sheetSize, Vector2 speed,int millisecondsPerFrame)
+
+        public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,
+            int collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed,
+            int millisecondsPerFrame)
         {
             this.textureImage = textureImage;
             this.position = position;
@@ -36,7 +37,9 @@ namespace SideScrollShooter
             this.sheetSize = sheetSize;
             this.speed = speed;
             this.millisecondsPerFrame = millisecondsPerFrame;
+           // this.layerDepth = layerDepth;
         }
+
 
         public virtual void Update(GameTime gameTime, Rectangle clientBounds)
         {
@@ -45,26 +48,25 @@ namespace SideScrollShooter
             {
                 timeSinceLastFrame = 0;
                 ++currentFrame.X;
-                if (currentFrame.X >= sheetSize.Y)
+                if (currentFrame.X >= sheetSize.X)
                 {
                     currentFrame.X = 0;
                     ++currentFrame.Y;
-                    if (currentFrame.Y >= frameSize.Y)
-                    {
+                    if (currentFrame.Y >= sheetSize.Y)
                         currentFrame.Y = 0;
-                    }
                 }
             }
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(textureImage, position,
+            spriteBatch.Draw(textureImage,
+                position,
                 new Rectangle(currentFrame.X * frameSize.X,
-                                currentFrame.Y * frameSize.Y,
-                                frameSize.X,frameSize.Y),
-                                Color.White, 0, Vector2.Zero, 1f, 
-                                SpriteEffects.None, 0);
+                    currentFrame.Y * frameSize.Y,
+                    frameSize.X, frameSize.Y),
+                Color.White, 0, Vector2.Zero,
+                1f, SpriteEffects.None, 0);
 
         }
 
@@ -94,8 +96,10 @@ namespace SideScrollShooter
             {
                 return true;
             }
+
             else
                 return false;
         }
+
     }
 }
