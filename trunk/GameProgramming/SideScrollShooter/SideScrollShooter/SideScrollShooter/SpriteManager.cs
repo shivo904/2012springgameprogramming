@@ -17,6 +17,10 @@ namespace SideScrollShooter
     /// </summary>
     public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
+
+        SpriteBatch spriteBatch;
+        UserControlledSprite player;
+        List<AutomatedSprite> groundTiles;
         public SpriteManager(Game game)
             : base(game)
         {
@@ -34,6 +38,19 @@ namespace SideScrollShooter
             base.Initialize();
         }
 
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+            //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
+            player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(0,Game.Window.ClientBounds.Height-72), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
+            groundTiles = new List<AutomatedSprite>();
+            for (int i = 0; i < Game.Window.ClientBounds.Width/2; i += 25)
+            {
+                groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(i, Game.Window.ClientBounds.Height - 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+            }
+            base.LoadContent();
+        }
+
         /// <summary>
         /// Allows the game component to update itself.
         /// </summary>
@@ -41,13 +58,31 @@ namespace SideScrollShooter
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
+            player.Update(gameTime, Game.Window.ClientBounds);
+            foreach (AutomatedSprite tile in groundTiles)
+            {
+                tile.position.X -= 1F;
+                tile.Update(gameTime, Game.Window.ClientBounds);
+                
+                if (player.collisionRect.Intersects(tile.collisionRect))
+                {
+                    player.position.Y = tile.position.Y - player.frameSize.Y;
+                    player.isJumping = false;
+                }
 
+                    
+            }
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
+            player.Draw(gameTime, spriteBatch);
+            foreach (AutomatedSprite tile in groundTiles)
+                tile.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
+            spriteBatch.End();
         }
     }
 }
