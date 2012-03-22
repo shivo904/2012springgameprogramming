@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.IO;
+using Microsoft.Xna.Framework.Storage;
 
 
 namespace SideScrollShooter
@@ -25,6 +27,7 @@ namespace SideScrollShooter
             : base(game)
         {
             // TODO: Construct any child components here
+            
         }
 
         /// <summary>
@@ -40,16 +43,33 @@ namespace SideScrollShooter
 
         protected override void LoadContent()
         {
-            Game.Content.Load<
+            //Game.Content.Load<
+            
+            StreamReader streamReader = new StreamReader("Content/testmap.txt");
+            groundTiles = new List<AutomatedSprite>();
+            String line;
+            int yTile = 0;
+            while((line =streamReader.ReadLine()) != null)
+            {
+                for (int xTile = 0; xTile < line.Length; xTile++)
+                {
+                    if (line[xTile]=='#')
+                    {
+                        groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(xTile * 25, yTile*25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                    }
+                }
+                yTile++;
+            }
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
             player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(0,Game.Window.ClientBounds.Height-72), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
-            groundTiles = new List<AutomatedSprite>();
+/*
             for (int i = 0; i < Game.Window.ClientBounds.Width*12; i += 25)
             {
                 if(((Game1)Game).rnd.Next(2)==1)
                 groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(i, Game.Window.ClientBounds.Height - 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
             }
+ */
             base.LoadContent();
         }
 
@@ -74,6 +94,9 @@ namespace SideScrollShooter
 
                     
             }
+
+            if (player.position.Y >= Game.Window.ClientBounds.Height)
+                Game.Exit();
             base.Update(gameTime);
         }
 
