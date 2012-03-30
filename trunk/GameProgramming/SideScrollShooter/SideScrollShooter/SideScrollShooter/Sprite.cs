@@ -15,7 +15,7 @@ namespace SideScrollShooter
         int timeSinceLastFrame = 0;
         int millisecondsPerFrame;
         const int defaultMillisecondsPerFrame = 16;
-        protected Vector2 speed;
+        public Vector2 speed;
         public Vector2 position;
 
         public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,

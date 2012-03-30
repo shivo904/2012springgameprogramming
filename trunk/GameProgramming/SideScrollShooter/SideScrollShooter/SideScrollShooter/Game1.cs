@@ -18,7 +18,9 @@ namespace SideScrollShooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteManager spriteManager;
+        public SpriteManager spriteManager;
+        public PauseMenuManager pauseMenuManager;
+        public enum GameState { gamePlay, menu, startScreen };
         public Random rnd { get; private set; }
         public Game1()
         {
@@ -39,7 +41,12 @@ namespace SideScrollShooter
         {
             // TODO: Add your initialization logic here
             spriteManager = new SpriteManager(this);
+            pauseMenuManager = new PauseMenuManager(this);
+
+            pauseMenuManager.Visible = false;
+            pauseMenuManager.Enabled = false;
             Components.Add(spriteManager);
+            Components.Add(pauseMenuManager);
             base.Initialize();
         }
 
@@ -74,6 +81,30 @@ namespace SideScrollShooter
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                this.Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.P)&& spriteManager.Enabled==true)
+            {
+                spriteManager.Enabled = false;
+                //spriteManager.Visible = false;
+                pauseMenuManager.Enabled = true;
+                pauseMenuManager.Visible = true;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.B) && spriteManager.Enabled==false)
+            {
+                spriteManager.Enabled = true;
+                spriteManager.Visible = true;
+                pauseMenuManager.Enabled = false;
+                pauseMenuManager.Visible = false;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            {
+                pauseMenuManager.Visible = false;
+                pauseMenuManager.Enabled = false;
+                Components.Remove(spriteManager);
+                spriteManager = new SpriteManager(this);
+                Components.Add(spriteManager);
+            }
 
             // TODO: Add your update logic here
 
