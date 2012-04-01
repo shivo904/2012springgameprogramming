@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 /*
- * The basic sprite class for my game
+ * The basic sprite class for my gam
  */
 namespace SideScrollShooter
 {
