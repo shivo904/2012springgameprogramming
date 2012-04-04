@@ -23,6 +23,7 @@ namespace SideScrollShooter
         SpriteBatch spriteBatch;
         UserControlledSprite player;
         List<AutomatedSprite> groundTiles;
+        List<AutomatedSprite> spikeTiles;
         public SpriteManager(Game game)
             : base(game)
         {
@@ -47,8 +48,11 @@ namespace SideScrollShooter
             
             StreamReader streamReader = new StreamReader("Content/testmap.txt");
             groundTiles = new List<AutomatedSprite>();
+            spikeTiles = new List<AutomatedSprite>();
             String line;
             int yTile = 0;
+
+            //converts the symbols into tiles for the level
             while((line =streamReader.ReadLine()) != null)
             {
                 for (int xTile = 0; xTile < line.Length; xTile++)
@@ -56,6 +60,10 @@ namespace SideScrollShooter
                     if (line[xTile]=='#')
                     {
                         groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(xTile * 25, yTile*25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                    }
+                    if (line[xTile] == '^')
+                    {
+                        spikeTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Spike"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
                     }
                 }
                 yTile++;
@@ -117,6 +125,21 @@ namespace SideScrollShooter
                     player.speed.Y = 0;
                     player.position.Y = tile.position.Y + tile.frameSize.Y;
                 }
+            }
+                
+                foreach (AutomatedSprite spike in spikeTiles)
+                {
+                spike.position.X -= 3F;
+                spike.Update(gameTime, Game.Window.ClientBounds);
+
+                //check if player touches a spike
+                if (player.collisionRect.Intersects(spike.collisionRect))
+                {
+                this.Enabled = false;
+                //this.Visible = false;
+                }
+
+              
 
             }
         }
@@ -143,6 +166,8 @@ namespace SideScrollShooter
             player.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite tile in groundTiles)
                 tile.Draw(gameTime, spriteBatch);
+            foreach (AutomatedSprite spike in spikeTiles)
+                spike.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
             spriteBatch.End();
         }
