@@ -9,3 +9,15 @@ C:\Users\Michael\Desktop\GameProgramming\SideScrollShooter\SideScrollShooter\Sid
 C:\Users\Michael\Desktop\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap.txt
 C:\Users\Michael\Desktop\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Continue.xnb
 C:\Users\Michael\Desktop\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Quit.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Player.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Ground.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Continue.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Quit.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap.txt
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.exe
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.pdb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.exe
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.pdb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Spike.xnb
