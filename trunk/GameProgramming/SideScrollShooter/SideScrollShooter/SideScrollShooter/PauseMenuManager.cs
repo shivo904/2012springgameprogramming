@@ -17,11 +17,13 @@ namespace SideScrollShooter
     /// </summary>
     public class PauseMenuManager: Microsoft.Xna.Framework.DrawableGameComponent
     {
+        int menuPosition;
         SpriteBatch spriteBatch;
         AutomatedSprite play;
         AutomatedSprite quit;
         AutomatedSprite restart;
         List<AutomatedSprite> menu;
+        KeyboardState prevKeyboardState;
         public PauseMenuManager(Game game)
             : base(game)
         {
@@ -42,6 +44,7 @@ namespace SideScrollShooter
 
         protected override void LoadContent()
         {
+            menuPosition = 0;
             menu = new List<AutomatedSprite>();
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2,0),new Point(200,50),0,Point.Zero,new Point(1,1),new Vector2(0,0));
@@ -58,12 +61,51 @@ namespace SideScrollShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            MouseState mouseState = Mouse.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
+            foreach(AutomatedSprite item in menu)
+            {
+                item.Update(gameTime, Game.Window.ClientBounds);
+                if (keyboardState.IsKeyDown(Keys.Down) && menuPosition<menu.Count-1 && keyboardState!=prevKeyboardState)
+                {
+                    menuPosition++;
+                }
+                if (keyboardState.IsKeyDown(Keys.Up) && menuPosition >0 && keyboardState!=prevKeyboardState)
+                {
+                    menuPosition--;
+                }
+
+                if (item.collisionRect.Intersects(new Rectangle(mouseState.X, mouseState.Y, 1, 1)))
+                {
+                    menuPosition = menu.IndexOf(item);
+                }
+                prevKeyboardState = keyboardState;
+            }
+            menu[menuPosition].currentFrame.X = 1;
+
+            if (keyboardState.IsKeyDown(Keys.Enter) || mouseState.LeftButton == ButtonState.Pressed)
+            {
+                if(menu[menuPosition]==play)
+                {
+                    ((Game1)Game).Play();
+                }
+                if(menu[menuPosition]==restart) 
+                {
+                    ((Game1)Game).Restart();
+                    menuPosition = 0;
+                }
+                if(menu[menuPosition]==quit)
+                {
+                    Game.Exit();
+                }
+            }
+
             // TODO: Add your update code here
             /*
             play.Update(gameTime, Game.Window.ClientBounds);
             restart.Update(gameTime,Game.Window.ClientBounds);
             quit.Update(gameTime, Game.Window.ClientBounds);
-            MouseState mouseState = Mouse.GetState();
+  
 
             if(play.collisionRect.Intersects(new Rectangle(mouseState.X,mouseState.Y,1,1)))
             {
@@ -95,6 +137,7 @@ namespace SideScrollShooter
             */
             base.Update(gameTime);
         }
+
         protected override void OnEnabledChanged(object sender, EventArgs args)
         {
             if (Enabled)
