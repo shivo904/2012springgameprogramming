@@ -99,16 +99,21 @@ namespace SideScrollShooter
             }
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
-                pauseMenuManager.Visible = false;
-                pauseMenuManager.Enabled = false;
-                Components.Remove(spriteManager);
-                spriteManager = new SpriteManager(this);
-                Components.Add(spriteManager);
+                Restart();
             }
 
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        public void Restart()
+        {
+            pauseMenuManager.Visible = false;
+            pauseMenuManager.Enabled = false;
+            Components.Remove(spriteManager);
+            spriteManager = new SpriteManager(this);
+            Components.Add(spriteManager);
         }
 
         /// <summary>

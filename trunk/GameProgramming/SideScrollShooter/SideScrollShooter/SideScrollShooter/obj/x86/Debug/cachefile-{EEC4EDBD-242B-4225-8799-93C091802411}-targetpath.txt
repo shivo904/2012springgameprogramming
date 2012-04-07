@@ -4,4 +4,5 @@ Content\Images\Continue.xnb
 Content\Images\Quit.xnb
 Content\Images\Spike.xnb
 Content\Images\Win.xnb
+Content\Images\Restart.xnb
 Content\testmap.txt
