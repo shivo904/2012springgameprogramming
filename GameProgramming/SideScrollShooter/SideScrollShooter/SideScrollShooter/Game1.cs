@@ -92,10 +92,7 @@ namespace SideScrollShooter
             }
             if (Keyboard.GetState().IsKeyDown(Keys.B) && spriteManager.Enabled==false)
             {
-                spriteManager.Enabled = true;
-                spriteManager.Visible = true;
-                pauseMenuManager.Enabled = false;
-                pauseMenuManager.Visible = false;
+                Play();
             }
             if (Keyboard.GetState().IsKeyDown(Keys.R))
             {
@@ -106,7 +103,13 @@ namespace SideScrollShooter
 
             base.Update(gameTime);
         }
-
+        public void Play()
+        {
+            spriteManager.Enabled = true;
+            spriteManager.Visible = true;
+            pauseMenuManager.Enabled = false;
+            pauseMenuManager.Visible = false;
+        }
         public void Restart()
         {
             pauseMenuManager.Visible = false;
