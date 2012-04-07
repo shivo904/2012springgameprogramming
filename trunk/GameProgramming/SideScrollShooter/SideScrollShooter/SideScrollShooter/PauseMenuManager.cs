@@ -21,6 +21,7 @@ namespace SideScrollShooter
         AutomatedSprite play;
         AutomatedSprite quit;
         AutomatedSprite restart;
+        List<AutomatedSprite> menu;
         public PauseMenuManager(Game game)
             : base(game)
         {
@@ -41,10 +42,14 @@ namespace SideScrollShooter
 
         protected override void LoadContent()
         {
+            menu = new List<AutomatedSprite>();
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2,0),new Point(200,50),0,Point.Zero,new Point(1,1),new Vector2(0,0));
             restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"),new Vector2(Game.Window.ClientBounds.Width/2,60),new Point(200,50),0,Point.Zero,new Point(1,1),Vector2.Zero);
             quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2, 120), new Point(200, 50), 0, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            menu.Add(play);
+            menu.Add(restart);
+            menu.Add(quit);
             base.LoadContent();
         }
         /// <summary>
@@ -54,6 +59,7 @@ namespace SideScrollShooter
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
+            /*
             play.Update(gameTime, Game.Window.ClientBounds);
             restart.Update(gameTime,Game.Window.ClientBounds);
             quit.Update(gameTime, Game.Window.ClientBounds);
@@ -86,6 +92,7 @@ namespace SideScrollShooter
                 if(mouseState.LeftButton == ButtonState.Pressed)
                  Game.Exit();
             }
+            */
             base.Update(gameTime);
         }
         protected override void OnEnabledChanged(object sender, EventArgs args)
