@@ -36,3 +36,5 @@ C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollS
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.exe
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.pdb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Restart.xnb
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\bullet.xnb
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\crossair.xnb

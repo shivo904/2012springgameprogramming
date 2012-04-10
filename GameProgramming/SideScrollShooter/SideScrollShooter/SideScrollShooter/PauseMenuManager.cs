@@ -37,7 +37,7 @@ namespace SideScrollShooter
         public override void Initialize()
         {
             // TODO: Add your initialization code here
-            Game.IsMouseVisible = true;
+          //  Game.IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -140,8 +140,8 @@ namespace SideScrollShooter
 
         protected override void OnEnabledChanged(object sender, EventArgs args)
         {
-            if (Enabled)
-                Game.IsMouseVisible = true;
+            //if (Enabled)
+               // Game.IsMouseVisible = true;
             if (!Enabled)
                 Game.IsMouseVisible = false;
             base.OnEnabledChanged(sender, args);

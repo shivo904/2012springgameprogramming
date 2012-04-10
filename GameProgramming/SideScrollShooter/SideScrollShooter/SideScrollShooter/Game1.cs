@@ -18,6 +18,8 @@ namespace SideScrollShooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D mouseImage;
+        Vector2 mousePos;
         public SpriteManager spriteManager;
         public PauseMenuManager pauseMenuManager;
         public enum GameState { gamePlay, menu, startScreen };
@@ -42,7 +44,7 @@ namespace SideScrollShooter
             // TODO: Add your initialization logic here
             spriteManager = new SpriteManager(this);
             pauseMenuManager = new PauseMenuManager(this);
-
+            IsMouseVisible = false;
             pauseMenuManager.Visible = false;
             pauseMenuManager.Enabled = false;
             Components.Add(spriteManager);
@@ -58,6 +60,7 @@ namespace SideScrollShooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            mouseImage = Content.Load<Texture2D>(@"Images/crossair");
 
             // TODO: use this.Content to load your game content here
         }
@@ -78,6 +81,7 @@ namespace SideScrollShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            mousePos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -98,7 +102,6 @@ namespace SideScrollShooter
             {
                 Restart();
             }
-
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -128,7 +131,9 @@ namespace SideScrollShooter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(mouseImage, mousePos, Color.White);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
