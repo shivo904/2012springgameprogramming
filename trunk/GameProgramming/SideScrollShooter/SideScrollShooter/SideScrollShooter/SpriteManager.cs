@@ -22,9 +22,12 @@ namespace SideScrollShooter
 
         SpriteBatch spriteBatch;
         UserControlledSprite player;
+        List<AutomatedSprite> bulletList;
         List<AutomatedSprite> groundTiles;
         List<AutomatedSprite> spikeTiles;
         List<AutomatedSprite> winTiles;
+        MouseState prevMouseState;
+        Texture2D bulletImage;
         public SpriteManager(Game game)
             : base(game)
         {
@@ -46,8 +49,9 @@ namespace SideScrollShooter
         protected override void LoadContent()
         {
             //Game.Content.Load<
-            
+
             StreamReader streamReader = new StreamReader("Content/testmap.txt");
+            bulletList = new List<AutomatedSprite>();
             groundTiles = new List<AutomatedSprite>();
             spikeTiles = new List<AutomatedSprite>();
             winTiles = new List<AutomatedSprite>();
@@ -78,7 +82,7 @@ namespace SideScrollShooter
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
             player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width/2,Game.Window.ClientBounds.Height-150), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
-
+            bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
             base.LoadContent();
         }
 
@@ -91,7 +95,7 @@ namespace SideScrollShooter
             // TODO: Add your update code here
             player.Update(gameTime, Game.Window.ClientBounds);
             collisionCheck(gameTime);
-
+            Shooting(gameTime);
 
             if (checkFallBelow())
             {
@@ -106,6 +110,26 @@ namespace SideScrollShooter
             base.Update(gameTime);
         }
 
+        private void Shooting(GameTime gameTime)
+        {
+            foreach (AutomatedSprite bullet in bulletList)
+                bullet.Update(gameTime, Game.Window.ClientBounds);
+            MouseState curMouseState = Mouse.GetState();
+            if (curMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton!=curMouseState.LeftButton)
+            {
+                Vector2 bulletSpeed = calcBulletSpeed(curMouseState);
+                bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), 0, Point.Zero, new Point(1, 1), bulletSpeed));
+            }
+
+            prevMouseState=curMouseState;
+        }
+        private Vector2 calcBulletSpeed(MouseState curMouseState)
+        {
+            Vector2 bulletSpeed;
+            bulletSpeed = new Vector2((curMouseState.X - player.position.X) / curMouseState.X, (curMouseState.Y - player.position.Y) / curMouseState.X);
+            
+            return bulletSpeed*20;
+        }
         private void collisionCheck(GameTime gameTime)
         {
             foreach (AutomatedSprite tile in groundTiles)
@@ -191,6 +215,10 @@ namespace SideScrollShooter
                 spike.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite winT in winTiles)
                 winT.Draw(gameTime, spriteBatch);
+            foreach (AutomatedSprite bullet in bulletList)
+                bullet.Draw(gameTime, spriteBatch);
+            
+
             base.Draw(gameTime);
             spriteBatch.End();
         }
