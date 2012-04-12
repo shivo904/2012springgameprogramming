@@ -7,4 +7,5 @@ Content\Images\Win.xnb
 Content\Images\Restart.xnb
 Content\Images\bullet.xnb
 Content\Images\crossair.xnb
-Content\testmap.txt
+Content\testmap1.txt
+Content\testmap2.txt

@@ -20,8 +20,8 @@ namespace SideScrollShooter
     public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
 
-        //        Texture2D blank;
-
+        Texture2D blank;
+        int levelNumber = 0;
         SpriteBatch spriteBatch;
         UserControlledSprite player;
         List<AutomatedSprite> bulletList;
@@ -52,22 +52,39 @@ namespace SideScrollShooter
         {
             //Game.Content.Load<
 
-            StreamReader streamReader = new StreamReader("Content/testmap.txt");
+
             bulletList = new List<AutomatedSprite>();
+
+
+            spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+            //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
+            player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width/2,Game.Window.ClientBounds.Height-150), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
+            bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
+            NextLevel();
+
+        blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+        blank.SetData(new[]{Color.White});
+            base.LoadContent();
+        }
+
+        public void NextLevel()
+        {
+            levelNumber++;
+            StreamReader streamReader = new StreamReader("Content/testmap"+levelNumber+".txt");
+            String line;
+            int yTile = 0;
             groundTiles = new List<AutomatedSprite>();
             spikeTiles = new List<AutomatedSprite>();
             winTiles = new List<AutomatedSprite>();
-            String line;
-            int yTile = 0;
-
+            
             //converts the symbols into tiles for the level
-            while((line =streamReader.ReadLine()) != null)
+            while ((line = streamReader.ReadLine()) != null)
             {
                 for (int xTile = 0; xTile < line.Length; xTile++)
                 {
-                    if (line[xTile]=='#')
+                    if (line[xTile] == '#')
                     {
-                        groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(xTile * 25, yTile*25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                        groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
                     }
                     if (line[xTile] == '^')
                     {
@@ -77,21 +94,11 @@ namespace SideScrollShooter
                     {
                         winTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Win"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
                     }
-                    
+
                 }
                 yTile++;
             }
-            spriteBatch = new SpriteBatch(Game.GraphicsDevice);
-            //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
-            player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width/2,Game.Window.ClientBounds.Height-150), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
-            bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
-
-
-       // blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-     //   blank.SetData(new[]{Color.White});
-            base.LoadContent();
         }
-
         /// <summary>
         /// Allows the game component to update itself.
         /// </summary>
@@ -102,7 +109,6 @@ namespace SideScrollShooter
             player.Update(gameTime, Game.Window.ClientBounds);
             collisionCheck(gameTime);
             Shooting(gameTime);
-
             if (checkFallBelow())
             {
                 this.Enabled = false;
@@ -126,7 +132,7 @@ namespace SideScrollShooter
                 Vector2 bulletSpeed = calcBulletSpeed(curMouseState);
                 bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), 0, Point.Zero, new Point(1, 1), bulletSpeed));
             }
-
+            
             prevMouseState=curMouseState;
         }
         void DrawLine(SpriteBatch batch, Texture2D blank,
@@ -135,7 +141,7 @@ namespace SideScrollShooter
             float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
             float length = Vector2.Distance(point1, point2);
 
-            batch.Draw(blank, point1, null, color,
+            batch.Draw(blank, point1, null, color, 
                        angle, Vector2.Zero, new Vector2(length, width),
                        SpriteEffects.None, 0);
         }
@@ -196,7 +202,8 @@ namespace SideScrollShooter
                 //check if player touches a spike
                 if (player.collisionRect.Intersects(winT.collisionRect))
                 {
-                    this.Enabled = false;
+                    winTiles.Clear();
+                    NextLevel();
                     //this.Visible = false;
                 }
 
@@ -226,7 +233,7 @@ namespace SideScrollShooter
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-          //  DrawLine(spriteBatch, blank, 2, Color.Black, player.position, new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
+            DrawLine(spriteBatch, blank, 2, Color.Black, player.position, new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             player.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite tile in groundTiles)
                 tile.Draw(gameTime, spriteBatch);
@@ -236,7 +243,7 @@ namespace SideScrollShooter
                 winT.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite bullet in bulletList)
                 bullet.Draw(gameTime, spriteBatch);
-            
+
 
             base.Draw(gameTime);
             spriteBatch.End();

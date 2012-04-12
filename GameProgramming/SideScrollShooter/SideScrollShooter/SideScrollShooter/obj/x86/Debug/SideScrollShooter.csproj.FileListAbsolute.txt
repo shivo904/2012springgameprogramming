@@ -28,7 +28,6 @@ C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollS
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Quit.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Spike.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Win.xnb
-C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap.txt
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.exe
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.pdb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\ResolveAssemblyReference.cache
@@ -38,3 +37,5 @@ C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollS
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Restart.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\bullet.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\crossair.xnb
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap2.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
