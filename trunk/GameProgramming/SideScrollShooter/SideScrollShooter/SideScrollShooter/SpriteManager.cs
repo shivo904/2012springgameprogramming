@@ -20,6 +20,8 @@ namespace SideScrollShooter
     public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
 
+        //        Texture2D blank;
+
         SpriteBatch spriteBatch;
         UserControlledSprite player;
         List<AutomatedSprite> bulletList;
@@ -83,6 +85,10 @@ namespace SideScrollShooter
             //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
             player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width/2,Game.Window.ClientBounds.Height-150), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
+
+
+       // blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+     //   blank.SetData(new[]{Color.White});
             base.LoadContent();
         }
 
@@ -122,6 +128,16 @@ namespace SideScrollShooter
             }
 
             prevMouseState=curMouseState;
+        }
+        void DrawLine(SpriteBatch batch, Texture2D blank,
+              float width, Color color, Vector2 point1, Vector2 point2)
+        {
+            float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+            float length = Vector2.Distance(point1, point2);
+
+            batch.Draw(blank, point1, null, color,
+                       angle, Vector2.Zero, new Vector2(length, width),
+                       SpriteEffects.None, 0);
         }
         private Vector2 calcBulletSpeed(MouseState curMouseState)
         {
@@ -205,9 +221,12 @@ namespace SideScrollShooter
             }
             return false;
         }
+
+        
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+          //  DrawLine(spriteBatch, blank, 2, Color.Black, player.position, new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             player.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite tile in groundTiles)
                 tile.Draw(gameTime, spriteBatch);
