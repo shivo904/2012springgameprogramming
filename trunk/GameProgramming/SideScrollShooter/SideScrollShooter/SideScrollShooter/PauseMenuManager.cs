@@ -22,6 +22,7 @@ namespace SideScrollShooter
         AutomatedSprite play;
         AutomatedSprite quit;
         AutomatedSprite restart;
+        AutomatedSprite restartGame;
         List<AutomatedSprite> menu;
         KeyboardState prevKeyboardState;
         public PauseMenuManager(Game game)
@@ -48,10 +49,12 @@ namespace SideScrollShooter
             menu = new List<AutomatedSprite>();
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2,0),new Point(200,50),0,Point.Zero,new Point(1,1),new Vector2(0,0));
-            restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"),new Vector2(Game.Window.ClientBounds.Width/2,60),new Point(200,50),0,Point.Zero,new Point(1,1),Vector2.Zero);
-            quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2, 120), new Point(200, 50), 0, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/RestartLevel"),new Vector2(Game.Window.ClientBounds.Width/2,60),new Point(200,50),0,Point.Zero,new Point(1,1),Vector2.Zero);
+            restartGame = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"), new Vector2(Game.Window.ClientBounds.Width / 2, 120), new Point(200, 50), 0, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2, 180), new Point(200, 50), 0, Point.Zero, new Point(1, 1), new Vector2(0, 0));
             menu.Add(play);
             menu.Add(restart);
+            menu.Add(restartGame);
             menu.Add(quit);
             base.LoadContent();
         }
@@ -93,6 +96,10 @@ namespace SideScrollShooter
                 {
                     ((Game1)Game).Restart();
                     menuPosition = 0;
+                }
+                if (menu[menuPosition] == restartGame)
+                {
+                    ((Game1)Game).RestartGame();
                 }
                 if(menu[menuPosition]==quit)
                 {
@@ -151,6 +158,7 @@ namespace SideScrollShooter
             spriteBatch.Begin();
             play.Draw(gameTime,spriteBatch);
             restart.Draw(gameTime, spriteBatch);
+            restartGame.Draw(gameTime, spriteBatch);
             quit.Draw(gameTime,spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

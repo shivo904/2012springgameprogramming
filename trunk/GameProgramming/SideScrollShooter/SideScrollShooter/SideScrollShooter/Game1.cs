@@ -128,6 +128,15 @@ namespace SideScrollShooter
             //spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
             Components.Add(spriteManager);
         }
+        public void RestartGame()
+        {
+            pauseMenuManager.Visible = false;
+            pauseMenuManager.Enabled = false;
+            Components.Remove(spriteManager);
+            spriteManager = new SpriteManager(this);
+            //spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
+            Components.Add(spriteManager);
+        }
 
         /// <summary>
         /// This is called when the game should draw itself.
