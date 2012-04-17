@@ -13,7 +13,6 @@ C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollS
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Ground.xnb
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Continue.xnb
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Quit.xnb
-C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap.txt
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.exe
@@ -41,3 +40,10 @@ C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollS
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\LevelTransition.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\RestartLevel.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Restart.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\bullet.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\crossair.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\LevelTransition.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\RestartLevel.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap2.txt
