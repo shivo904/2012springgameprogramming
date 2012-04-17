@@ -21,7 +21,7 @@ namespace SideScrollShooter
     {
 
         Texture2D blank;
-        int levelNumber = 0;
+        private int levelNumber = 1;
         SpriteBatch spriteBatch;
         UserControlledSprite player;
         List<AutomatedSprite> bulletList;
@@ -35,6 +35,11 @@ namespace SideScrollShooter
         {
             // TODO: Construct any child components here
             
+        }
+        public SpriteManager(Game game,int levelNumber)
+            : base(game)
+        {
+            this.levelNumber = levelNumber;
         }
 
         /// <summary>
@@ -58,13 +63,47 @@ namespace SideScrollShooter
 
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
-            player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width/2,Game.Window.ClientBounds.Height-150), new Point(40, 72), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
+            player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width/2,Game.Window.ClientBounds.Height-150), new Point(19, 30), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
-            NextLevel();
+            SetLevel(levelNumber);
 
         blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
         blank.SetData(new[]{Color.White});
             base.LoadContent();
+        }
+
+
+        public void SetLevel(int levelNumber)
+        {
+            this.levelNumber=levelNumber;
+            StreamReader streamReader = new StreamReader("Content/testmap" + levelNumber + ".txt");
+            String line;
+            int yTile = 0;
+            groundTiles = new List<AutomatedSprite>();
+            spikeTiles = new List<AutomatedSprite>();
+            winTiles = new List<AutomatedSprite>();
+
+            //converts the symbols into tiles for the level
+            while ((line = streamReader.ReadLine()) != null)
+            {
+                for (int xTile = 0; xTile < line.Length; xTile++)
+                {
+                    if (line[xTile] == '#')
+                    {
+                        groundTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Ground"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                    }
+                    if (line[xTile] == '^')
+                    {
+                        spikeTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Spike"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                    }
+                    if (line[xTile] == '!')
+                    {
+                        winTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Win"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                    }
+
+                }
+                yTile++;
+            }
         }
 
         public void NextLevel()
@@ -202,8 +241,12 @@ namespace SideScrollShooter
                 //check if player touches a spike
                 if (player.collisionRect.Intersects(winT.collisionRect))
                 {
-                    winTiles.Clear();
-                    NextLevel();
+                    //winTiles.Clear();
+                    Visible = false;
+                    Enabled = false;
+                    ((Game1)Game).levelTransition.Visible = true;
+                    ((Game1)Game).levelTransition.Enabled = true;
+                    break;
                     //this.Visible = false;
                 }
 
@@ -248,5 +291,14 @@ namespace SideScrollShooter
             base.Draw(gameTime);
             spriteBatch.End();
         }
+        public int getLevelNumber()
+        {
+            return levelNumber;
+        }
+        public void setLevelNumber(int levelNumber)
+        {
+            this.levelNumber = levelNumber;
+        }
+
     }
 }
