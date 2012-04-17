@@ -22,6 +22,7 @@ namespace SideScrollShooter
         Vector2 mousePos;
         public SpriteManager spriteManager;
         public PauseMenuManager pauseMenuManager;
+        public LevelTransition levelTransition;
         public enum GameState { gamePlay, menu, startScreen };
         public Random rnd { get; private set; }
         public Game1()
@@ -29,8 +30,9 @@ namespace SideScrollShooter
             rnd = new Random();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+
         }
 
         /// <summary>
@@ -44,11 +46,15 @@ namespace SideScrollShooter
             // TODO: Add your initialization logic here
             spriteManager = new SpriteManager(this);
             pauseMenuManager = new PauseMenuManager(this);
+            levelTransition = new LevelTransition(this);
             IsMouseVisible = false;
             pauseMenuManager.Visible = false;
             pauseMenuManager.Enabled = false;
+            levelTransition.Visible = false;
+            levelTransition.Enabled = false;
             Components.Add(spriteManager);
             Components.Add(pauseMenuManager);
+            Components.Add(levelTransition);
             base.Initialize();
         }
 
@@ -118,7 +124,8 @@ namespace SideScrollShooter
             pauseMenuManager.Visible = false;
             pauseMenuManager.Enabled = false;
             Components.Remove(spriteManager);
-            spriteManager = new SpriteManager(this);
+            spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
+            //spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
             Components.Add(spriteManager);
         }
 

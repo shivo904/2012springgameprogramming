@@ -1,5 +1,4 @@
 Content\Images\Player.xnb
-Content\Images\Ground.xnb
 Content\Images\Continue.xnb
 Content\Images\Quit.xnb
 Content\Images\Spike.xnb
@@ -7,5 +6,7 @@ Content\Images\Win.xnb
 Content\Images\Restart.xnb
 Content\Images\bullet.xnb
 Content\Images\crossair.xnb
+Content\Images\Ground.xnb
+Content\Images\LevelTransition.xnb
 Content\testmap1.txt
 Content\testmap2.txt
