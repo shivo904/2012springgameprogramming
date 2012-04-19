@@ -9,5 +9,6 @@ Content\Images\crossair.xnb
 Content\Images\Ground.xnb
 Content\Images\LevelTransition.xnb
 Content\Images\RestartLevel.xnb
+Content\Images\Destructable.xnb
 Content\testmap1.txt
 Content\testmap2.txt
