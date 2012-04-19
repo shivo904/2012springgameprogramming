@@ -48,3 +48,4 @@ C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollS
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap2.txt
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Destructable.xnb
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Destructable.xnb

@@ -17,7 +17,8 @@ namespace SideScrollShooter
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
+    public class 
+        SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
 
         Texture2D blank;
@@ -29,7 +30,7 @@ namespace SideScrollShooter
         List<AutomatedSprite> groundTiles;
         List<AutomatedSprite> spikeTiles;
         List<AutomatedSprite> winTiles;
-        List<AutomatedSprite> destructableTiles;
+        List<AutomatedSprite> destructibleTiles;
         MouseState prevMouseState;
         Texture2D bulletImage;
         public SpriteManager(Game game)
@@ -84,7 +85,7 @@ namespace SideScrollShooter
             groundTiles = new List<AutomatedSprite>();
             spikeTiles = new List<AutomatedSprite>();
             winTiles = new List<AutomatedSprite>();
-            destructableTiles = new List<AutomatedSprite>();
+            destructibleTiles = new List<AutomatedSprite>();
 
             //converts the symbols into tiles for the level
             while ((line = streamReader.ReadLine()) != null)
@@ -105,7 +106,7 @@ namespace SideScrollShooter
                     }
                     if (line[xTile] == 'x')
                     {
-                        destructableTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Destructable"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                        destructibleTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/destructable"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
                     }
 
                 }
@@ -122,7 +123,7 @@ namespace SideScrollShooter
             groundTiles = new List<AutomatedSprite>();
             spikeTiles = new List<AutomatedSprite>();
             winTiles = new List<AutomatedSprite>();
-            destructableTiles = new List<AutomatedSprite>();
+            destructibleTiles = new List<AutomatedSprite>();
             
             //converts the symbols into tiles for the level
             while ((line = streamReader.ReadLine()) != null)
@@ -143,7 +144,7 @@ namespace SideScrollShooter
                     }
                     if (line[xTile] == 'x')
                     {
-                        destructableTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Destructable"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
+                        destructibleTiles.Add(new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/destructable"), new Vector2(xTile * 25, yTile * 25), new Point(25, 25), 0, new Point(0, 0), new Point(1, 1), Vector2.Zero));
                     }
 
                 }
@@ -199,9 +200,11 @@ namespace SideScrollShooter
         private Vector2 calcBulletSpeed(MouseState curMouseState)
         {
             Vector2 bulletSpeed;
-            bulletSpeed = new Vector2((curMouseState.X - player.position.X) / curMouseState.X, (curMouseState.Y - player.position.Y) / curMouseState.X);
-            
-            return bulletSpeed*20;
+            bulletSpeed = new Vector2((curMouseState.X - player.position.X) / (curMouseState.X - player.position.X), (curMouseState.Y - player.position.Y) / (curMouseState.X - player.position.X));
+
+            if ((curMouseState.X - player.position.X) < 0)
+                bulletSpeed *= -1;
+            return bulletSpeed*5;
         }
         private void collisionCheck(GameTime gameTime)
         {
@@ -264,19 +267,19 @@ namespace SideScrollShooter
 
             }
 
-            for (int count = 0; count < destructableTiles.Count; ++count)
+            for (int count = 0; count < destructibleTiles.Count; ++count)
             {
                 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                Sprite x = destructableTiles[count];
+   
 
                 for (int i = 0; i < bulletList.Count; ++i)
                 {
                     Sprite s = bulletList[i];
 
-                    if (s.collisionRect.Intersects(x.collisionRect))
+                    if (s.collisionRect.Intersects(destructibleTiles[count].collisionRect))
                     {
                         bulletList.RemoveAt(i);
-                        destructableTiles.RemoveAt(count);
+                        destructibleTiles.RemoveAt(count);
                         --i;
                         --count;
                     }
@@ -284,33 +287,33 @@ namespace SideScrollShooter
                 }
                 count++;
             }
-                foreach(AutomatedSprite destructableT in destructableTiles)
+                foreach(AutomatedSprite destructibleT in destructibleTiles)
                 {
                 //treated like a ground tile
-                destructableT.position.X -= 3F;
-                destructableT.Update(gameTime, Game.Window.ClientBounds);
+                destructibleT.position.X -= 3F;
+                destructibleT.Update(gameTime, Game.Window.ClientBounds);
 
                 //check if player is on top of tile
-                if (player.collisionRect.Intersects(destructableT.collisionRect) && player.collisionRect.Bottom >= destructableT.collisionRect.Top && player.collisionRect.Bottom <= destructableT.collisionRect.Bottom)
+                if (player.collisionRect.Intersects(destructibleT.collisionRect) && player.collisionRect.Bottom >= destructibleT.collisionRect.Top && player.collisionRect.Bottom <= destructibleT.collisionRect.Bottom)
                 {
                     player.isJumping = false;
-                    player.position.Y = destructableT.position.Y - player.frameSize.Y;
+                    player.position.Y = destructibleT.position.Y - player.frameSize.Y;
 
                 }
 
                 //check if player is next to (on left of tile)
-                if (player.collisionRect.Intersects(destructableT.collisionRect) && player.collisionRect.Right >= destructableT.collisionRect.Left && player.collisionRect.Right <= destructableT.collisionRect.Left + 5)
+                if (player.collisionRect.Intersects(destructibleT.collisionRect) && player.collisionRect.Right >= destructibleT.collisionRect.Left && player.collisionRect.Right <= destructibleT.collisionRect.Left + 5)
                 {
-                    player.position.X = destructableT.position.X - player.frameSize.X;
+                    player.position.X = destructibleT.position.X - player.frameSize.X;
                 }
 
-                if (player.collisionRect.Intersects(destructableT.collisionRect) && player.collisionRect.Top <= destructableT.collisionRect.Bottom && player.collisionRect.Top > destructableT.collisionRect.Top)
+                if (player.collisionRect.Intersects(destructibleT.collisionRect) && player.collisionRect.Top <= destructibleT.collisionRect.Bottom && player.collisionRect.Top > destructibleT.collisionRect.Top)
                 {
                     player.speed.Y = 0;
-                    player.position.Y = destructableT.position.Y + destructableT.frameSize.Y;
+                    player.position.Y = destructibleT.position.Y + destructibleT.frameSize.Y;
                 }
 
-                //If bullet touches a destructable tile, the tile is removed (replaced with air)
+                //If bullet touches a destructible tile, the tile is removed (replaced with air)
                
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -340,7 +343,6 @@ namespace SideScrollShooter
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            DrawLine(spriteBatch, blank, 2, Color.Black, player.position, new Vector2(Mouse.GetState().X, Mouse.GetState().Y));
             player.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite tile in groundTiles)
                 tile.Draw(gameTime, spriteBatch);
@@ -350,8 +352,8 @@ namespace SideScrollShooter
                 winT.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite bullet in bulletList)
                 bullet.Draw(gameTime, spriteBatch);
-            foreach (AutomatedSprite destructable in destructableTiles)
-                destructable.Draw(gameTime, spriteBatch);
+            foreach (AutomatedSprite destructible in destructibleTiles)
+                destructible.Draw(gameTime, spriteBatch);
 
 
             base.Draw(gameTime);
