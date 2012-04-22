@@ -53,12 +53,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="testmap1.txt">
-      <Name>testmap1</Name>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Images\Continue.png">
       <Name>Continue</Name>
       <Importer>TextureImporter</Importer>
@@ -106,6 +100,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="testmap1.txt">
+      <Name>testmap1</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="testmap2.txt">
       <Name>testmap2</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -138,6 +136,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="emptymap.txt">
+      <Name>emptymap</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
