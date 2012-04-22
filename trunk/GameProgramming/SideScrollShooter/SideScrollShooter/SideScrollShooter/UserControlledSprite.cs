@@ -62,10 +62,15 @@ namespace SideScrollShooter
                  */
                if(isJumping==true )
                {
-                   if(keyboardState.IsKeyDown(Keys.Space)) //chagne rate of falling based on if space is held down
+                   if (keyboardState.IsKeyDown(Keys.Space)) //chagne rate of falling based on if space is held down
                        speed.Y += 2;
                    else
+                   {
                        speed.Y += 5;
+                       if (speed.Y > 50)
+                           speed.Y =  50;
+
+                   }
                }
 
                 GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);

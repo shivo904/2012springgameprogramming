@@ -12,3 +12,4 @@ Content\Images\RestartLevel.xnb
 Content\Images\Destructable.xnb
 Content\testmap1.txt
 Content\testmap2.txt
+Content\emptymap.txt
