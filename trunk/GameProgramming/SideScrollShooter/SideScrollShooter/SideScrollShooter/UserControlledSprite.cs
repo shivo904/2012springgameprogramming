@@ -98,8 +98,8 @@ namespace SideScrollShooter
 
             if (position.Y < 0)
                 position.Y = 0;
-            if (position.X > clientBounds.Width/2)
-                position.X = clientBounds.Width /2;
+            //if (position.X > clientBounds.Width/2)
+            //    position.X = clientBounds.Width /2;
             if (position.Y > clientBounds.Height - frameSize.Y)
             {
               

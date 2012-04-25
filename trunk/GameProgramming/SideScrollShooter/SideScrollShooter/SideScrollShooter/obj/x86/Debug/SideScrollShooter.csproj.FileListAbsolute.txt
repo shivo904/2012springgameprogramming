@@ -50,3 +50,48 @@ C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollS
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Destructable.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Destructable.xnb
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\emptymap.txt
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Player.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Continue.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Quit.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Spike.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Win.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Restart.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\bullet.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\crossair.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Ground.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\LevelTransition.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\RestartLevel.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Destructable.xnb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap2.txt
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\emptymap.txt
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.exe
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.pdb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.exe
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.pdb
+C:\Documents and Settings\students.AS143-W3\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Teleport.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Player.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Continue.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Quit.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Spike.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Win.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Restart.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\bullet.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\crossair.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Ground.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\LevelTransition.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\RestartLevel.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Destructable.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Teleport.xnb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap2.txt
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\emptymap.txt
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.exe
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\SideScrollShooter.pdb
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.exe
+C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.pdb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Teleport.xnb
