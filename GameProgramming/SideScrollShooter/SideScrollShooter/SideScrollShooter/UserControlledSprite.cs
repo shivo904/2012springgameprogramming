@@ -13,6 +13,7 @@ namespace SideScrollShooter
         private KeyboardState previousKeyboardState;
         private GamePadState previousGamePadState;
         private int continuousMovementSpeed = 0;
+        private float minorSpeed = .05F;
         private float gravity = .2F;
         public bool isJumping = true;
         public bool isDucking = false;
@@ -25,6 +26,8 @@ namespace SideScrollShooter
         }
 
         public UserControlledSprite(Texture2D textureImage, Vector2 position,
+
+
             Point frameSize, int collisionOffset, Point currentFrame, Point sheetSize,
             Vector2 speed, int millisecondsPerFrame)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame,
@@ -36,7 +39,7 @@ namespace SideScrollShooter
         {
             get
             {
-                Vector2 inputDirection = new Vector2(continuousMovementSpeed+.05F,gravity);
+                Vector2 inputDirection = new Vector2(continuousMovementSpeed+minorSpeed,gravity);
                 
                 KeyboardState keyboardState = Keyboard.GetState();
 //                if (keyboardState.IsKeyDown(Keys.Left))
@@ -98,8 +101,13 @@ namespace SideScrollShooter
 
             if (position.Y < 0)
                 position.Y = 0;
-            //if (position.X > clientBounds.Width/2)
-            //    position.X = clientBounds.Width /2;
+            if (position.X < clientBounds.Width / 2)
+                minorSpeed = .05F;
+            if (position.X > clientBounds.Width / 2)
+                minorSpeed = -.05F;
+            if (position.X == clientBounds.Width / 2)
+                minorSpeed = 0F;
+            
             if (position.Y > clientBounds.Height - frameSize.Y)
             {
               
