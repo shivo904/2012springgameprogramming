@@ -95,3 +95,4 @@ C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\ob
 C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.exe
 C:\Users\Shadow\Desktop\SideScrollShooter\SideScrollShooter\SideScrollShooter\obj\x86\Debug\SideScrollShooter.pdb
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Teleport.xnb
+C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Blood.xnb

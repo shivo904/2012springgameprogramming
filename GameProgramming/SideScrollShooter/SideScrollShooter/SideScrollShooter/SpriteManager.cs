@@ -32,8 +32,10 @@ namespace SideScrollShooter
         List<AutomatedSprite> winTiles;
         List<AutomatedSprite> destructibleTiles;
         List<AutomatedSprite> teleportTiles;
+        List<AutomatedSprite> bloodList;
         MouseState prevMouseState;
         Texture2D bulletImage;
+        Texture2D bloodImage;
         public SpriteManager(Game game)
             : base(game)
         {
@@ -63,12 +65,13 @@ namespace SideScrollShooter
 
 
             bulletList = new List<AutomatedSprite>();
-
+            bloodList = new List<AutomatedSprite>();
 
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
             player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), new Vector2(Game.Window.ClientBounds.Width / 2, Game.Window.ClientBounds.Height - 150), new Point(19, 30), 0, new Point(0, 0), new Point(1, 1), new Vector2(10, 10));
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
+            bloodImage = Game.Content.Load<Texture2D>(@"Images/Blood");
             SetLevel(levelNumber);
 
             blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
@@ -217,6 +220,22 @@ namespace SideScrollShooter
                 bulletSpeed *= -1;
             return bulletSpeed * 5;
         }
+
+        
+        
+        private void deathBlood(GameTime gameTime)
+        {
+            foreach (AutomatedSprite blood in bloodList)
+                blood.Update(gameTime, Game.Window.ClientBounds);
+            
+        }
+
+
+
+
+
+
+
         private void collisionCheck(GameTime gameTime)
         {
             foreach (AutomatedSprite tile in groundTiles)
@@ -414,6 +433,8 @@ namespace SideScrollShooter
                 destructible.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite teleport in teleportTiles)
                 teleport.Draw(gameTime, spriteBatch);
+            foreach (AutomatedSprite blood in bloodList)
+                blood.Draw(gameTime, spriteBatch);
 
 
             base.Draw(gameTime);
