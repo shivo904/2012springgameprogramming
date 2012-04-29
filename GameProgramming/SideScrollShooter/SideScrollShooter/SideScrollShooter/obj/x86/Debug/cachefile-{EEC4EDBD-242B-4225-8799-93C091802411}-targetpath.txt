@@ -12,6 +12,7 @@ Content\Images\RestartLevel.xnb
 Content\Images\Destructable.xnb
 Content\Images\Teleport.xnb
 Content\Images\Blood.xnb
+Content\Images\Monster.xnb
 Content\testmap1.txt
 Content\testmap3.txt
 Content\emptymap.txt

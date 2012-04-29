@@ -27,13 +27,9 @@ namespace SideScrollShooter
 
         //Lists for updating stuff
         List<AutomatedSprite> bulletList;
-        List<AutomatedSprite> groundTiles;
-        List<AutomatedSprite> spikeTiles;
-        List<AutomatedSprite> winTiles;
-        List<AutomatedSprite> destructibleTiles;
-        List<AutomatedSprite> teleportTiles;
         List<AutomatedSprite> bloodList;
         List<Block> blocks;
+        List<Enemy> enemies;
         MouseState prevMouseState;
 
         //Images
@@ -45,6 +41,7 @@ namespace SideScrollShooter
         Texture2D winImage;
         Texture2D destructableImage;
         Texture2D teleportImage;
+        Texture2D flyerImage;
 
 
         //Settings
@@ -79,13 +76,14 @@ namespace SideScrollShooter
         {
             //Game.Content.Load<
             blocks = new List<Block>();
-
+            enemies = new List<Enemy>();
             bulletList = new List<AutomatedSprite>();
             bloodList = new List<AutomatedSprite>();
 
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
-            
+
+            flyerImage = Game.Content.Load<Texture2D>(@"Images/Monster");
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
             bloodImage = Game.Content.Load<Texture2D>(@"Images/Blood");
             blockImage = Game.Content.Load<Texture2D>(@"Images/Ground");
@@ -112,11 +110,6 @@ namespace SideScrollShooter
             StreamReader streamReader = new StreamReader("Content/testmap" + levelNumber + ".txt");
             String line;
             int yTile = 0;
-            groundTiles = new List<AutomatedSprite>();
-            spikeTiles = new List<AutomatedSprite>();
-            winTiles = new List<AutomatedSprite>();
-            destructibleTiles = new List<AutomatedSprite>();
-            teleportTiles = new List<AutomatedSprite>();
             blocks = new List<Block>();
 
             //converts the symbols into tiles for the level
@@ -125,15 +118,18 @@ namespace SideScrollShooter
                 for (int xTile = 0; xTile < line.Length; xTile++)
                 {
                     if (line[xTile] == '#')
-                        blocks.Add(new GroundBlock(blockImage,new Vector2(xTile * 25, yTile * 25),scrollSpeed));
+                        blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
                     else if (line[xTile] == '^')
-                        blocks.Add(new Spike(spikeImage, new Vector2(xTile * 25, yTile * 25),scrollSpeed));
+                        blocks.Add(new Spike(spikeImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
                     else if (line[xTile] == '!')
-                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 25, yTile * 25),scrollSpeed));
+                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
                     else if (line[xTile] == 'x')
-                        destructibleTiles.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 25, yTile * 25),scrollSpeed));
+                        blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
                     else if (line[xTile] == '?')
-                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 25, yTile * 25),scrollSpeed));
+                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                    else if (line[xTile] == 'Q')
+                        enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        
 
                 }
                 yTile++;
@@ -371,19 +367,12 @@ namespace SideScrollShooter
             player.Draw(gameTime, spriteBatch);
             foreach (Block block in blocks)
                 block.Draw(gameTime, spriteBatch);
-                
-            foreach (AutomatedSprite spike in spikeTiles)
-                spike.Draw(gameTime, spriteBatch);
-            foreach (AutomatedSprite winT in winTiles)
-                winT.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite bullet in bulletList)
                 bullet.Draw(gameTime, spriteBatch);
-            foreach (AutomatedSprite destructible in destructibleTiles)
-                destructible.Draw(gameTime, spriteBatch);
-            foreach (AutomatedSprite teleport in teleportTiles)
-                teleport.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite blood in bloodList)
                 blood.Draw(gameTime, spriteBatch);
+            foreach (Enemy enemy in enemies)
+                enemy.Draw(gameTime, spriteBatch);
 
 
             base.Draw(gameTime);
