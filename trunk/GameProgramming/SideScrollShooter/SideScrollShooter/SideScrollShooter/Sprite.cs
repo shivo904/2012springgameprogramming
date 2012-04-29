@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
  */
 namespace SideScrollShooter
 {
-    abstract class Sprite
+    public abstract class Sprite
     {
         Texture2D textureImage;
         public Point frameSize;
