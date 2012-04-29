@@ -16,7 +16,7 @@ namespace SideScrollShooter
         }
 
         public AutomatedSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset,
-            Point currentFrame, Point sheetSize, Vector2 speed, int millisecondsPerFrame, float layerDepth)
+            Point currentFrame, Point sheetSize, Vector2 speed, int millisecondsPerFrame)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed, millisecondsPerFrame)
         {
         }

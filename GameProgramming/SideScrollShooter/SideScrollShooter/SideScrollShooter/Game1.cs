@@ -27,6 +27,7 @@ namespace SideScrollShooter
         public Random rnd { get; private set; }
         public Game1()
         {
+            GameController gameController = new GameController(this);
             rnd = new Random();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
