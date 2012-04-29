@@ -145,6 +145,10 @@ namespace SideScrollShooter
         {
             // TODO: Add your update code here
             player.Update(gameTime, Game.Window.ClientBounds);
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.Update(gameTime, Game.Window.ClientBounds);
+            }
             foreach (Block block in blocks)
             {
                 block.Update(gameTime, Game.Window.ClientBounds);
