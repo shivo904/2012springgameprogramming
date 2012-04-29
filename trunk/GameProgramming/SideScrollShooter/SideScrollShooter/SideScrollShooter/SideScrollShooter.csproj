@@ -111,6 +111,8 @@
     <Compile Include="Block.cs" />
     <Compile Include="Blood.cs" />
     <Compile Include="DestructableBlock.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="FlyingEnemy.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="GroundBlock.cs" />
     <Compile Include="LevelBuilder.cs" />
