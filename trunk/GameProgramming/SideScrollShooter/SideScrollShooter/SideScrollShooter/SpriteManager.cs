@@ -52,6 +52,7 @@ namespace SideScrollShooter
         Cue bulletCue;
 
         //Settings
+        public Vector2 backgroundScrollSpeed = new Vector2(-2, 0);
         public float scrollSpeed = 3F;
         private int levelNumber = 1;
         Vector2 backgroundPosition = new Vector2(0, 0);
@@ -98,7 +99,7 @@ namespace SideScrollShooter
             flyerImage = Game.Content.Load<Texture2D>(@"Images/Monster");
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
             bloodImage = Game.Content.Load<Texture2D>(@"Images/Blood");
-            blockImage = Game.Content.Load<Texture2D>(@"Images/Ground");
+            blockImage = Game.Content.Load<Texture2D>(@"Images/blockcolors/BlockB");
             spikeImage = Game.Content.Load<Texture2D>(@"Images/Spike");
             winImage = Game.Content.Load<Texture2D>(@"Images/Win");
             destructableImage = Game.Content.Load<Texture2D>(@"Images/Destructable");
@@ -136,17 +137,17 @@ namespace SideScrollShooter
                 {
                     
                     if (line[xTile] == '#')
-                        blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
+                        blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 30, yTile * 30)));
                     else if (line[xTile] == '^')
-                        blocks.Add(new Spike(spikeImage, new Vector2(xTile *30, yTile * 30), scrollSpeed));
+                        blocks.Add(new Spike(spikeImage, new Vector2(xTile *30, yTile * 30)));
                     else if (line[xTile] == '!')
-                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
+                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 30, yTile * 30)));
                     else if (line[xTile] == 'x')
-                        blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
+                        blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 30, yTile * 30)));
                     else if (line[xTile] == '?')
-                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
+                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 30, yTile * 30)));
                     else if (line[xTile] == 'Q')
-                        enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
+                        enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 30, yTile * 30)));
                         
 
                 }
@@ -170,8 +171,7 @@ namespace SideScrollShooter
                 enemies[i].Update(gameTime, Game.Window.ClientBounds);
                 if (enemies[i].collisionRect.Intersects(player.collisionRect))
                 {
-                    player.dead = true;
-                    soundBank.PlayCue("hit");
+                    player.kill();
                 }
                 for (int j = 0; j < bulletList.Count; j++)
                 {
@@ -216,7 +216,7 @@ namespace SideScrollShooter
                 this.Enabled = false;
                 //this.Visible = false; 
             }
-            backgroundPosition.X-=2;
+            backgroundPosition+=backgroundScrollSpeed;
             if (backgroundPosition.X < -Game.Window.ClientBounds.Width)
                 backgroundPosition.X = 0;
             base.Update(gameTime);
@@ -330,18 +330,26 @@ namespace SideScrollShooter
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, new Rectangle((int)backgroundPosition.X, (int)backgroundPosition.Y, Game.Window.ClientBounds.Width*2, Game.Window.ClientBounds.Height), Color.White);
-            player.Draw(gameTime, spriteBatch);
+
+
+            
+            
+
             foreach (Block block in blocks)
                 block.Draw(gameTime, spriteBatch);
             foreach (AutomatedSprite bullet in bulletList)
                 bullet.Draw(gameTime, spriteBatch);
-            foreach (AutomatedSprite blood in bloodList)
-                blood.Draw(gameTime, spriteBatch);
             foreach (Enemy enemy in enemies)
                 enemy.Draw(gameTime, spriteBatch);
 
 
+            player.Draw(gameTime, spriteBatch);
+
+
+            foreach (AutomatedSprite blood in bloodList)
+                blood.Draw(gameTime, spriteBatch); 
             spriteBatch.Draw(GameController.game.mouseImage, GameController.game.mousePos, Color.White);
+
             base.Draw(gameTime);
             spriteBatch.End();
         }

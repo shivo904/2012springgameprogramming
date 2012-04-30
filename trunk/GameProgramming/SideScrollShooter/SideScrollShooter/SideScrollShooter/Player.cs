@@ -37,56 +37,61 @@ namespace SideScrollShooter
         {
             get
             {
-                GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
-                Vector2 inputDirection = new Vector2(continuousMovementSpeed+minorSpeed,gravity);
-                
-                KeyboardState keyboardState = Keyboard.GetState();
-                if (keyboardState.IsKeyDown(Keys.A))
-                {
-                    inputDirection.X -= .4F;
-                    millisecondsPerFrame = 200;
+       
+                    GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
+                    Vector2 inputDirection = new Vector2(continuousMovementSpeed + minorSpeed, gravity);
+
+                    KeyboardState keyboardState = Keyboard.GetState();
+                    if (keyboardState.IsKeyDown(Keys.A))
+                    {
+                        inputDirection.X -= .4F;
+                        millisecondsPerFrame = 200;
+                    }
+                    if (keyboardState.IsKeyDown(Keys.D))
+                    {
+                        inputDirection.X += .2F;
+                        millisecondsPerFrame = 75;
+                    }
+                    if ((!keyboardState.IsKeyDown(Keys.D) && !keyboardState.IsKeyDown(Keys.A)))
+                    {
+                        millisecondsPerFrame = 100;
+                    }
+                    if ((keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) && isJumping == false)
+                    {
+                        speed.Y = -50;
+                        isJumping = true;
+                    }
+
+                    if (isJumping == true)
+                    {
+                        if (keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) //chagne rate of falling based on if space is held down
+                            speed.Y += 2;
+                        else
+                        {
+                            speed.Y += 5;
+                            if (speed.Y > 50)
+                                speed.Y = 50;
+
+                        }
+                    }
+
+
+                    if (gamepadState.ThumbSticks.Left.X != 0)
+                        inputDirection.X += gamepadState.ThumbSticks.Left.X / 5;
+
+
+
+
+                    previousGamePadState = gamepadState;
+                    previousKeyboardState = keyboardState;
+
+                    if(!dead)
+                        return inputDirection * speed;
+                    else
+                      return new Vector2(0,(inputDirection.Y*speed.Y));
                 }
-                if (keyboardState.IsKeyDown(Keys.D))
-                {
-                    inputDirection.X += .2F;
-                    millisecondsPerFrame = 75;
-                }
-                if ((!keyboardState.IsKeyDown(Keys.D) && !keyboardState.IsKeyDown(Keys.A)))
-                {
-                    millisecondsPerFrame = 100;
-                }
-                if ((keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick))  && isJumping == false)
-                {
-                    speed.Y = -50;
-                    isJumping = true;
-                }
 
-               if(isJumping==true )
-               {
-                   if (keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) //chagne rate of falling based on if space is held down
-                       speed.Y += 2;
-                   else
-                   {
-                       speed.Y += 5;
-                       if (speed.Y > 50)
-                           speed.Y =  50;
-
-                   }
-               }
-
-
-                if (gamepadState.ThumbSticks.Left.X != 0)
-                    inputDirection.X += gamepadState.ThumbSticks.Left.X/5;
- 
-
-
- 
-                previousGamePadState = gamepadState;
-                previousKeyboardState = keyboardState;
-                
-                
-                return inputDirection * speed;
-            }
+            
 
         }
 
@@ -119,7 +124,7 @@ namespace SideScrollShooter
             }
             if (dead)
             {
-                bloodList.Add(new Blood(bloodImage,position,bloodSpeed()));
+                bloodList.Add(new Blood(bloodImage,new Vector2(position.X+13,position.Y+5),bloodSpeed()));
             }
             position += direction;
 
@@ -138,6 +143,27 @@ namespace SideScrollShooter
             }
 
             base.Update(gameTime, clientBounds);
+        }
+
+        public void kill()
+        {
+
+            if (!dead)
+            {
+                GameController.game.spriteManager.soundBank.PlayCue("hit");
+                GameController.game.spriteManager.scrollSpeed = 0;
+                GameController.game.spriteManager.backgroundScrollSpeed = Vector2.Zero;
+                sheetSize = new Point(1, 1);
+                currentFrame = new Point(0, 1);
+
+            }
+            
+            dead = true;
+
+            //position = new Vector2(position.X - GameController.game.spriteManager.scrollSpeed, position.Y);
+           
+
+
         }
     }
 }

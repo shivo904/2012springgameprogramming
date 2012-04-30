@@ -9,8 +9,8 @@ namespace SideScrollShooter
 {
     class TeleportBlock:Block
     {
-        public TeleportBlock(Texture2D textureImage, Vector2 position,float scrollSpeed)
-            :base(textureImage,position,new Point(4,1),scrollSpeed)
+        public TeleportBlock(Texture2D textureImage, Vector2 position)
+            :base(textureImage,position,new Point(4,1))
         {
 
         }

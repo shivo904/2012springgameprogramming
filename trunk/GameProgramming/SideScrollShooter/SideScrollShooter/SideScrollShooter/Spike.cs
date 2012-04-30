@@ -9,16 +9,15 @@ namespace SideScrollShooter
 {
     class Spike:Block
     {
-        public Spike(Texture2D textureImage, Vector2 position,float scrollSpeed)
-            :base(textureImage,position,scrollSpeed)
+        public Spike(Texture2D textureImage, Vector2 position)
+            :base(textureImage,position)
         {
         }
 
 
         public override void playerCollision(Player player)
         {
-            GameController.game.spriteManager.player.dead = true;
-            GameController.game.spriteManager.soundBank.PlayCue("hit");
+            player.kill();
             //Game1.Restart();
             base.playerCollision(player);
         }

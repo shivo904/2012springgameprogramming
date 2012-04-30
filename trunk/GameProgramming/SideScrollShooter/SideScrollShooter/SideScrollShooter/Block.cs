@@ -9,22 +9,21 @@ namespace SideScrollShooter
 {
     abstract class Block:AutomatedSprite
     {
-        protected float scrollSpeed;
-        public Block(Texture2D textureImage,Vector2 position, float scrollSpeed)
-            :this(textureImage,position,new Point(1,1),scrollSpeed)
+
+        public Block(Texture2D textureImage,Vector2 position)
+            :this(textureImage,position,new Point(1,1))
         {
         }
 
-        public Block(Texture2D textureImage, Vector2 position, Point sheetSize, float scrollSpeed)
-            : this(textureImage, position, new Point(30, 30), Vector2.Zero, new Point(1, 1), sheetSize, Vector2.Zero, scrollSpeed)
+        public Block(Texture2D textureImage, Vector2 position, Point sheetSize)
+            : this(textureImage, position, new Point(30, 30), Vector2.Zero, new Point(1, 1), sheetSize, Vector2.Zero)
         {
         }
 
         public Block(Texture2D textureImage, Vector2 position, Point frameSize, Vector2 collisionOffset,
-             Point currentFrame, Point sheetSize, Vector2 speed,float scrollSpeed)
+             Point currentFrame, Point sheetSize, Vector2 speed)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed)
         {
-            this.scrollSpeed = scrollSpeed;
         }
 
 
@@ -36,7 +35,7 @@ namespace SideScrollShooter
 
         public override void Update(GameTime gameTime, Rectangle clientBounds)
         {
-            position.X -= scrollSpeed;
+            position.X -= GameController.game.spriteManager.scrollSpeed;
             base.Update(gameTime, clientBounds);
         }
         virtual public void bulletCollision(AutomatedSprite bullet)
@@ -54,18 +53,23 @@ namespace SideScrollShooter
             }
             else if (player.collisionRect.Top < collisionRect.Top && player.collisionRect.Top > collisionRect.Bottom)
             {
+                //player hits bottom
                 player.speed.Y = 0;
                 player.position.Y = position.Y + frameSize.Y;
                 player.isJumping = true; 
             }
             else if (player.collisionRect.Right > collisionRect.Left && player.collisionRect.Right < collisionRect.Right)
             {
+                //player is on left of tile
                //ameController.game.Exit();
+                player.currentFrame.X = 3;
                 player.position.X = position.X - player.frameSize.X;
                 player.isJumping = true; 
             }
             else if(player.collisionRect.Left< collisionRect.Right && player.collisionRect.Left > collisionRect.Left)
             {
+                //player is to the right
+                player.currentFrame.X = 3;
                 player.position.X =position.X+frameSize.X;
                 player.isJumping = true; 
             }
