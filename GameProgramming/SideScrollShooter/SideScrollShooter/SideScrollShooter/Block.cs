@@ -56,11 +56,18 @@ namespace SideScrollShooter
             {
                 player.speed.Y = 0;
                 player.position.Y = position.Y + frameSize.Y;
+                player.isJumping = true; 
             }
             else if (player.collisionRect.Right >= collisionRect.Left && player.collisionRect.Right <= collisionRect.Right)
             {
                 player.position.X = position.X - player.frameSize.X;
-            }   
+                player.isJumping = true; 
+            }
+            else if(player.collisionRect.Left<= collisionRect.Right && player.collisionRect.Left >= collisionRect.Left)
+            {
+                player.position.X =position.X+frameSize.X;
+                player.isJumping = true; 
+            }
             else
             {
                 player.isJumping = true; 
