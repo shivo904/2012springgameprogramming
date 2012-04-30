@@ -151,7 +151,7 @@ namespace SideScrollShooter
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
- 
+            player.Update(gameTime, Game.Window.ClientBounds);
             for (int i = 0; i < enemies.Count;i++)
             {
                 enemies[i].Update(gameTime, Game.Window.ClientBounds);
@@ -172,7 +172,7 @@ namespace SideScrollShooter
                         }
                     }
                 }
-                player.Update(gameTime, Game.Window.ClientBounds);
+
             }
             foreach (Block block in blocks)
             {
