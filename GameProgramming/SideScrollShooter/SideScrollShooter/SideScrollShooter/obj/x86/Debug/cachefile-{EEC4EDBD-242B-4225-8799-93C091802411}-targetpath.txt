@@ -13,6 +13,12 @@ Content\Images\Destructable.xnb
 Content\Images\Teleport.xnb
 Content\Images\Blood.xnb
 Content\Images\Monster.xnb
+Content\Images\Walkingman.xnb
+Content\Audio\shooting.xnb
+Content\Images\background1.xnb
+Content\Audio\Sounds.xgs
+Content\Audio\Wave Bank.xwb
+Content\Audio\Sound Bank.xsb
 Content\testmap1.txt
 Content\testmap3.txt
 Content\emptymap.txt

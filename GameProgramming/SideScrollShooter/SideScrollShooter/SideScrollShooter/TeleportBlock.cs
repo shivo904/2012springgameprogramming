@@ -19,6 +19,7 @@ namespace SideScrollShooter
         {
             GameController.game.spriteManager.player.position.X = position.X;
             GameController.game.spriteManager.player.position.Y = position.Y - 25;
+            GameController.game.spriteManager.soundBank.PlayCue("warp");
             base.bulletCollision(bullet);
         }
 

@@ -25,7 +25,7 @@ namespace SideScrollShooter
                    Point frameSize, Vector2 collisionOffset, Point currentFrame, Point sheetSize,
                    Vector2 speed)
             :base(textureImage, position, frameSize, collisionOffset, currentFrame,
-            sheetSize, speed)
+            sheetSize, speed,100)
         {
             bloodList = new List<AutomatedSprite>();
             this.bloodImage = bloodImage;
@@ -42,9 +42,19 @@ namespace SideScrollShooter
                 
                 KeyboardState keyboardState = Keyboard.GetState();
                 if (keyboardState.IsKeyDown(Keys.A))
-                   inputDirection.X -= .5F;
+                {
+                    inputDirection.X -= .4F;
+                    millisecondsPerFrame = 200;
+                }
                 if (keyboardState.IsKeyDown(Keys.D))
+                {
                     inputDirection.X += .2F;
+                    millisecondsPerFrame = 75;
+                }
+                if ((!keyboardState.IsKeyDown(Keys.D) && !keyboardState.IsKeyDown(Keys.A)))
+                {
+                    millisecondsPerFrame = 100;
+                }
                 if ((keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick))  && isJumping == false)
                 {
                     speed.Y = -50;

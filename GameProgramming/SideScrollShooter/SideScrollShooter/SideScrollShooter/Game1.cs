@@ -18,8 +18,8 @@ namespace SideScrollShooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D mouseImage;
-        Vector2 mousePos;
+        public Texture2D mouseImage;
+        public Vector2 mousePos;
         public SpriteManager spriteManager;
         public PauseMenuManager pauseMenuManager;
         public LevelTransition levelTransition;
@@ -33,7 +33,7 @@ namespace SideScrollShooter
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 1300;
             graphics.PreferredBackBufferHeight = 720;
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
 
         }
 
@@ -146,10 +146,10 @@ namespace SideScrollShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront,BlendState.Additive);
             spriteBatch.Draw(mouseImage, mousePos, Color.White);
             spriteBatch.End();
             base.Draw(gameTime);

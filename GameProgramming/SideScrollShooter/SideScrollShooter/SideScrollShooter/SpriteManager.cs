@@ -34,6 +34,7 @@ namespace SideScrollShooter
         GamePadState prevGamePadState;
 
         //Images
+        Texture2D background;
         Texture2D blank;
         Texture2D bulletImage;
         Texture2D bloodImage;
@@ -43,12 +44,17 @@ namespace SideScrollShooter
         Texture2D destructableImage;
         Texture2D teleportImage;
         Texture2D flyerImage;
-
+        
+        //Sounds
+        AudioEngine audioEngine;
+        WaveBank waveBank;
+        public SoundBank soundBank;
+        Cue bulletCue;
 
         //Settings
         public float scrollSpeed = 3F;
         private int levelNumber = 1;
-
+        Vector2 backgroundPosition = new Vector2(0, 0);
 
         public SpriteManager(Game game)
             : base(game)
@@ -75,14 +81,19 @@ namespace SideScrollShooter
 
         protected override void LoadContent()
         {
-            //Game.Content.Load<
+            background = Game.Content.Load<Texture2D>(@"Images/background1");
             blocks = new List<Block>();
             enemies = new List<Enemy>();
             bulletList = new List<AutomatedSprite>();
             bloodList = new List<AutomatedSprite>();
 
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
-            //player = new UserControlledSprite(Game.Content.Load<Texture2D>(@"Images/Player"), Vector2.Zero, new Point(80, 80), 0, new Point(0, 0), new Point(1, 1), new Vector2(10,10));
+           
+
+            audioEngine = new AudioEngine(@"Content\Audio\Sounds.xgs");
+            waveBank = new WaveBank(audioEngine,@"Content\Audio\Wave Bank.xwb");
+            soundBank = new SoundBank(audioEngine, @"Content\Audio\Sound Bank.xsb");
+            bulletCue = soundBank.GetCue("shooting");
 
             flyerImage = Game.Content.Load<Texture2D>(@"Images/Monster");
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
@@ -93,7 +104,7 @@ namespace SideScrollShooter
             destructableImage = Game.Content.Load<Texture2D>(@"Images/Destructable");
             teleportImage = Game.Content.Load<Texture2D>(@"Images/Teleport");
 
-            player = new Player(Game.Content.Load<Texture2D>(@"Images/Player"), bloodImage, new Vector2(Game.Window.ClientBounds.Width / 2, Game.Window.ClientBounds.Height - 150), new Point(19, 30), Vector2.Zero, new Point(0, 0), new Point(1, 1), new Vector2(10, 10));
+            player = new Player(Game.Content.Load<Texture2D>(@"Images/Walkingman"), bloodImage, new Vector2(Game.Window.ClientBounds.Width / 2, Game.Window.ClientBounds.Height - 150), new Point(28, 35), Vector2.Zero, new Point(0, 0), new Point(8, 1), new Vector2(10, 10));
             blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
             SetLevel(levelNumber);
@@ -154,24 +165,27 @@ namespace SideScrollShooter
             player.Update(gameTime, Game.Window.ClientBounds);
             for (int i = 0; i < enemies.Count;i++)
             {
+
+
                 enemies[i].Update(gameTime, Game.Window.ClientBounds);
                 if (enemies[i].collisionRect.Intersects(player.collisionRect))
                 {
                     player.dead = true;
+                    soundBank.PlayCue("hit");
                 }
-
-                if (bulletList.Count != 0)
+                for (int j = 0; j < bulletList.Count; j++)
                 {
-                    for (int j = 0; j < bulletList.Count; j++)
+ 
+                    if (j<bulletList.Count && i<enemies.Count && enemies[i].collisionRect.Intersects(bulletList[j].collisionRect))
                     {
+                        enemies.Remove(enemies[i]);
+                        bulletList.Remove(bulletList[j]);
 
-                        if (bulletList[j].collisionRect.Intersects(enemies[i].collisionRect))
-                        {
-                            bulletList.RemoveAt(j);
-                            enemies.RemoveAt(i);
-                        }
                     }
                 }
+
+
+                
 
             }
             foreach (Block block in blocks)
@@ -202,6 +216,9 @@ namespace SideScrollShooter
                 this.Enabled = false;
                 //this.Visible = false; 
             }
+            backgroundPosition.X-=2;
+            if (backgroundPosition.X < -Game.Window.ClientBounds.Width)
+                backgroundPosition.X = 0;
             base.Update(gameTime);
         }
 
@@ -219,6 +236,8 @@ namespace SideScrollShooter
             if (curMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton != curMouseState.LeftButton)
             {
                 Vector2 bulletSpeed = calcBulletSpeed(curMouseState);
+                soundBank.PlayCue("shooting");
+                
                 bulletList.Add(new AutomatedSprite(bulletImage, new Vector2(player.position.X+19,player.position.Y+15), new Point(5, 5), Vector2.Zero, Point.Zero, new Point(1, 1), bulletSpeed));
             }
 
@@ -309,6 +328,8 @@ namespace SideScrollShooter
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+
+            spriteBatch.Draw(background, new Rectangle((int)backgroundPosition.X, (int)backgroundPosition.Y, Game.Window.ClientBounds.Width*2, Game.Window.ClientBounds.Height), Color.White);
             player.Draw(gameTime, spriteBatch);
             foreach (Block block in blocks)
                 block.Draw(gameTime, spriteBatch);
@@ -320,6 +341,7 @@ namespace SideScrollShooter
                 enemy.Draw(gameTime, spriteBatch);
 
 
+            spriteBatch.Draw(GameController.game.mouseImage, GameController.game.mousePos, Color.White);
             base.Draw(gameTime);
             spriteBatch.End();
         }

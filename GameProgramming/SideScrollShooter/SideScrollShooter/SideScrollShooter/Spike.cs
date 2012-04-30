@@ -18,6 +18,7 @@ namespace SideScrollShooter
         public override void playerCollision(Player player)
         {
             GameController.game.spriteManager.player.dead = true;
+            GameController.game.spriteManager.soundBank.PlayCue("hit");
             //Game1.Restart();
             base.playerCollision(player);
         }
