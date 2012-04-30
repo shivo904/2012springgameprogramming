@@ -9,8 +9,8 @@ namespace SideScrollShooter
 {
     class FlyingEnemy:Enemy
     {
-        public FlyingEnemy(Texture2D textureImage, Vector2 position, float scrollSpeed)
-            : base(textureImage, position, new Point(90,32),new Vector2(15,0),new Point(1,4),Point.Zero,Vector2.Zero,scrollSpeed)
+        public FlyingEnemy(Texture2D textureImage, Vector2 position)
+            : base(textureImage, position, new Point(90,32),new Vector2(15,0),new Point(1,4),Point.Zero,Vector2.Zero)
         {
 
         }

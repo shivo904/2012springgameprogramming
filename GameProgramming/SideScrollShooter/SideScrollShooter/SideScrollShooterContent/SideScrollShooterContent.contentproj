@@ -42,10 +42,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Audio\" />
     <Folder Include="SpriteFonts\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio\shooting.wav">
+      <Name>shooting</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Audio\Sounds.xap">
+      <Name>Sounds</Name>
+      <Importer>XactImporter</Importer>
+      <Processor>XactProcessor</Processor>
+    </Compile>
     <Compile Include="Images\Player.png">
       <Name>Player</Name>
       <Importer>TextureImporter</Importer>
@@ -166,6 +175,132 @@
   <ItemGroup>
     <Compile Include="Images\Monster.png">
       <Name>Monster</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\Walkingman.png">
+      <Name>Walkingman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\background1.png">
+      <Name>background1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\blockcolors\BlockB.png">
+      <Name>BlockB</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\BlockB2.png">
+      <Name>BlockB2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\Blockcolorless.png">
+      <Name>Blockcolorless</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockG.png">
+      <Name>blockG</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockG2.png">
+      <Name>blockG2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\BlockGr.png">
+      <Name>BlockGr</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\BlockGr2.png">
+      <Name>BlockGr2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockO.png">
+      <Name>blockO</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockO2.png">
+      <Name>blockO2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockOr.png">
+      <Name>blockOr</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockOr2.png">
+      <Name>blockOr2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockP.png">
+      <Name>blockP</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockP2.png">
+      <Name>blockP2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\BlockPi.png">
+      <Name>BlockPi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\BlockPi2.png">
+      <Name>BlockPi2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockR.png">
+      <Name>blockR</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockR2.png">
+      <Name>blockR2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockT.png">
+      <Name>blockT</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockT2.png">
+      <Name>blockT2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockY.png">
+      <Name>blockY</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\blockY2.png">
+      <Name>blockY2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\blockcolors\breakable1.png">
+      <Name>breakable1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

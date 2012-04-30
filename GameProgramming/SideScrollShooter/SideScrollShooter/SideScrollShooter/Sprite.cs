@@ -10,7 +10,7 @@ namespace SideScrollShooter
         Texture2D textureImage;
         public Point frameSize;
         public Point currentFrame;
-        Point sheetSize;
+        protected Point sheetSize;
         protected Vector2 collisionOffset;
         int timeSinceLastFrame = 0;
         protected int millisecondsPerFrame;

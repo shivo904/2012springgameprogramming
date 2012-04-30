@@ -9,8 +9,8 @@ namespace SideScrollShooter
 {
     class DestructableBlock:Block
     {
-        public DestructableBlock(Texture2D textureImage, Vector2 position,float scrollSpeed)
-            :base(textureImage,position,scrollSpeed)
+        public DestructableBlock(Texture2D textureImage, Vector2 position)
+            :base(textureImage,position)
         {
         }
 

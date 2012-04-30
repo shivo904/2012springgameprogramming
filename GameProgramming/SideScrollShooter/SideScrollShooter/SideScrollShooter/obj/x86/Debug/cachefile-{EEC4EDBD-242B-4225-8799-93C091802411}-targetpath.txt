@@ -16,6 +16,28 @@ Content\Images\Monster.xnb
 Content\Images\Walkingman.xnb
 Content\Audio\shooting.xnb
 Content\Images\background1.xnb
+Content\Images\blockcolors\BlockB.xnb
+Content\Images\blockcolors\BlockB2.xnb
+Content\Images\blockcolors\Blockcolorless.xnb
+Content\Images\blockcolors\blockG.xnb
+Content\Images\blockcolors\blockG2.xnb
+Content\Images\blockcolors\BlockGr.xnb
+Content\Images\blockcolors\BlockGr2.xnb
+Content\Images\blockcolors\blockO.xnb
+Content\Images\blockcolors\blockO2.xnb
+Content\Images\blockcolors\blockOr.xnb
+Content\Images\blockcolors\blockOr2.xnb
+Content\Images\blockcolors\blockP.xnb
+Content\Images\blockcolors\blockP2.xnb
+Content\Images\blockcolors\BlockPi.xnb
+Content\Images\blockcolors\BlockPi2.xnb
+Content\Images\blockcolors\blockR.xnb
+Content\Images\blockcolors\blockR2.xnb
+Content\Images\blockcolors\blockT.xnb
+Content\Images\blockcolors\blockT2.xnb
+Content\Images\blockcolors\blockY.xnb
+Content\Images\blockcolors\blockY2.xnb
+Content\Images\blockcolors\breakable1.xnb
 Content\Audio\Sounds.xgs
 Content\Audio\Wave Bank.xwb
 Content\Audio\Sound Bank.xsb

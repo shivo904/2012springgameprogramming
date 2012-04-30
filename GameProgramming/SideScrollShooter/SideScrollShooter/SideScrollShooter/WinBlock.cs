@@ -10,8 +10,8 @@ namespace SideScrollShooter
     class WinBlock:Block
     {
         public static bool hit = false;
-        public WinBlock(Texture2D textureImage, Vector2 position,float scrollSpeed)
-            : base(textureImage, position,scrollSpeed) 
+        public WinBlock(Texture2D textureImage, Vector2 position)
+            : base(textureImage, position) 
         { 
         }
 
