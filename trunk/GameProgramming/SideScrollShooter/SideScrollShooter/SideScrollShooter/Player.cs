@@ -37,33 +37,23 @@ namespace SideScrollShooter
         {
             get
             {
+                GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
                 Vector2 inputDirection = new Vector2(continuousMovementSpeed+minorSpeed,gravity);
                 
                 KeyboardState keyboardState = Keyboard.GetState();
-//                if (keyboardState.IsKeyDown(Keys.Left))
-  //                  inputDirection.X -= 1;
-    //            if (keyboardState.IsKeyDown(Keys.Right))
-      //              inputDirection.X += 1;
-                if (keyboardState.IsKeyDown(Keys.Space)  && isJumping == false)
+                if (keyboardState.IsKeyDown(Keys.A))
+                   inputDirection.X -= .5F;
+                if (keyboardState.IsKeyDown(Keys.D))
+                    inputDirection.X += .2F;
+                if ((keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick))  && isJumping == false)
                 {
                     speed.Y = -50;
                     isJumping = true;
                 }
-                /*
-                if (!isJumping && isDucking==false&& keyboardState.IsKeyDown(Keys.LeftShift))
-                {
-                    isDucking = true;
-                    frameSize.Y /= 2;
-                }
-                if (isDucking && keyboardState.IsKeyUp(Keys.LeftShift))
-                {
-                    frameSize.Y *= 2;
-                    isDucking = false;
-                }
-                 */
+
                if(isJumping==true )
                {
-                   if (keyboardState.IsKeyDown(Keys.Space)) //chagne rate of falling based on if space is held down
+                   if (keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) //chagne rate of falling based on if space is held down
                        speed.Y += 2;
                    else
                    {
@@ -74,14 +64,13 @@ namespace SideScrollShooter
                    }
                }
 
-                GamePadState gamepadState = GamePad.GetState(PlayerIndex.One);
+
                 if (gamepadState.ThumbSticks.Left.X != 0)
-                    inputDirection.X += gamepadState.ThumbSticks.Left.X;
-                 if (gamepadState.IsButtonDown(Buttons.A) && !previousGamePadState.IsButtonDown(Buttons.A))
-                {
-                    inputDirection.Y += -2;
-                    isJumping = true;
-                }
+                    inputDirection.X += gamepadState.ThumbSticks.Left.X/5;
+ 
+
+
+ 
                 previousGamePadState = gamepadState;
                 previousKeyboardState = keyboardState;
                 

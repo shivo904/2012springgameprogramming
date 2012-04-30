@@ -31,6 +31,7 @@ namespace SideScrollShooter
         List<Block> blocks;
         List<Enemy> enemies;
         MouseState prevMouseState;
+        GamePadState prevGamePadState;
 
         //Images
         Texture2D blank;
@@ -122,6 +123,7 @@ namespace SideScrollShooter
             {
                 for (int xTile = 0; xTile < line.Length; xTile++)
                 {
+                    
                     if (line[xTile] == '#')
                         blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
                     else if (line[xTile] == '^')
@@ -216,6 +218,17 @@ namespace SideScrollShooter
                 bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), Vector2.Zero, Point.Zero, new Point(1, 1), bulletSpeed));
             }
 
+            GamePadState curGamePadState = GamePad.GetState(PlayerIndex.One);
+            if (curGamePadState.IsButtonDown(Buttons.RightStick) && prevGamePadState.IsButtonDown(Buttons.RightStick) != curGamePadState.IsButtonDown(Buttons.RightStick))
+            {
+                
+                Vector2 bulletSpeed = calcBulletSpeedController(curGamePadState);
+                bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), Vector2.Zero, Point.Zero, new Point(1, 1), bulletSpeed));
+            }
+
+
+
+            prevGamePadState = curGamePadState;
             prevMouseState = curMouseState;
         }
         void DrawLine(SpriteBatch batch, Texture2D blank,
@@ -227,6 +240,24 @@ namespace SideScrollShooter
             batch.Draw(blank, point1, null, color,
                        angle, Vector2.Zero, new Vector2(length, width),
                        SpriteEffects.None, 0);
+        }
+
+        private Vector2 calcBulletSpeedController(GamePadState curGamePadState)
+        {
+
+
+            double speed = 10F;
+            //Vector2 gamePadPosition = new Vector2((curMouseState.X - player.position.X) / (curMouseState.X - player.position.X), (curMouseState.Y - player.position.Y) / (curMouseState.X - player.position.X));
+            Vector2 gamePadPosition = curGamePadState.ThumbSticks.Right;
+            double angle = Math.Atan(-gamePadPosition.Y / gamePadPosition.X);
+
+
+            Vector2 finalSpeed = new Vector2((float)(speed * Math.Cos(angle)), (float)(speed * Math.Sin(angle)));
+            if (curGamePadState.ThumbSticks.Right.X < 0)
+            {
+                finalSpeed*=-1;
+            }
+            return finalSpeed;
         }
         private Vector2 calcBulletSpeed(MouseState curMouseState)
         {
