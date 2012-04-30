@@ -31,8 +31,8 @@ namespace SideScrollShooter
             rnd = new Random();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 1300;
+            graphics.PreferredBackBufferHeight = 720;
             //graphics.IsFullScreen = true;
 
         }

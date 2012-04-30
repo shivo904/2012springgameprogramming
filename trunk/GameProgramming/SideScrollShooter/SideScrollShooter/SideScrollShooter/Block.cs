@@ -46,24 +46,25 @@ namespace SideScrollShooter
         virtual public void playerCollision(Player player)
         {
             //check if player is on top of tile
-            if (player.collisionRect.Bottom >= collisionRect.Top && player.collisionRect.Bottom <= collisionRect.Bottom)
+            if (player.collisionRect.Bottom > collisionRect.Top && player.collisionRect.Bottom < collisionRect.Bottom)
             {
                 player.isJumping = false;
                 player.position.Y = position.Y - player.frameSize.Y;
 
             }
-            else if (player.collisionRect.Top <= collisionRect.Top && player.collisionRect.Top > collisionRect.Bottom)
+            else if (player.collisionRect.Top < collisionRect.Top && player.collisionRect.Top > collisionRect.Bottom)
             {
                 player.speed.Y = 0;
                 player.position.Y = position.Y + frameSize.Y;
                 player.isJumping = true; 
             }
-            else if (player.collisionRect.Right >= collisionRect.Left && player.collisionRect.Right <= collisionRect.Right)
+            else if (player.collisionRect.Right > collisionRect.Left && player.collisionRect.Right < collisionRect.Right)
             {
+               //ameController.game.Exit();
                 player.position.X = position.X - player.frameSize.X;
                 player.isJumping = true; 
             }
-            else if(player.collisionRect.Left<= collisionRect.Right && player.collisionRect.Left >= collisionRect.Left)
+            else if(player.collisionRect.Left< collisionRect.Right && player.collisionRect.Left > collisionRect.Left)
             {
                 player.position.X =position.X+frameSize.X;
                 player.isJumping = true; 

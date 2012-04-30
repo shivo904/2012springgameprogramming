@@ -125,17 +125,17 @@ namespace SideScrollShooter
                 {
                     
                     if (line[xTile] == '#')
-                        blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
                     else if (line[xTile] == '^')
-                        blocks.Add(new Spike(spikeImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        blocks.Add(new Spike(spikeImage, new Vector2(xTile *30, yTile * 30), scrollSpeed));
                     else if (line[xTile] == '!')
-                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
                     else if (line[xTile] == 'x')
-                        blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
                     else if (line[xTile] == '?')
-                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
                     else if (line[xTile] == 'Q')
-                        enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 25, yTile * 25), scrollSpeed));
+                        enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 30, yTile * 30), scrollSpeed));
                         
 
                 }
