@@ -19,6 +19,7 @@ namespace SideScrollShooter
         private float gravity = .2F;
         public bool isJumping = true;
         public bool isDucking = false;
+        Vector2 bloodDirection;
         Texture2D bloodImage;
         public Player(Texture2D textureImage,Texture2D bloodImage, Vector2 position,
                    Point frameSize, Vector2 collisionOffset, Point currentFrame, Point sheetSize,
@@ -100,18 +101,22 @@ namespace SideScrollShooter
         }
 
 
+        
         public Vector2 bloodSpeed()
         {
-            int ySpeed = GameController.game.rnd.Next(-5,5);
+            int ySpeed = GameController.game.rnd.Next(-5,5);       
             int xSpeed = GameController.game.rnd.Next(-5,5);
-
-            return new Vector2(xSpeed,ySpeed);
+            bloodDirection = new Vector2(xSpeed, ySpeed);
+            return bloodDirection;
+            
         }
         public override void Update(GameTime gameTime, Rectangle clientBounds)
         {
             foreach (AutomatedSprite blood in bloodList)
             {
+                blood.speed.Y += .1F;
                 blood.Update(gameTime, clientBounds);
+                
             }
             if (dead)
             {
