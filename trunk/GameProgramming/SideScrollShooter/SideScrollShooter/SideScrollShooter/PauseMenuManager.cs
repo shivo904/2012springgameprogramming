@@ -48,10 +48,10 @@ namespace SideScrollShooter
             menuPosition = 0;
             menu = new List<AutomatedSprite>();
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
-            play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2,0),new Point(200,50),0,Point.Zero,new Point(1,1),new Vector2(0,0));
-            restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/RestartLevel"),new Vector2(Game.Window.ClientBounds.Width/2,60),new Point(200,50),0,Point.Zero,new Point(1,1),Vector2.Zero);
-            restartGame = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"), new Vector2(Game.Window.ClientBounds.Width / 2, 120), new Point(200, 50), 0, Point.Zero, new Point(1, 1), new Vector2(0, 0));
-            quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2, 180), new Point(200, 50), 0, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2,0),new Point(200,50),Vector2.Zero,Point.Zero,new Point(1,1),new Vector2(0,0));
+            restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/RestartLevel"), new Vector2(Game.Window.ClientBounds.Width / 2, 60), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), Vector2.Zero);
+            restartGame = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"), new Vector2(Game.Window.ClientBounds.Width / 2, 120), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2, 180), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
             menu.Add(play);
             menu.Add(restart);
             menu.Add(restartGame);

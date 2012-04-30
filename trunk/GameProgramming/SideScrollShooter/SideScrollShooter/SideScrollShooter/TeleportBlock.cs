@@ -21,5 +21,10 @@ namespace SideScrollShooter
             GameController.game.spriteManager.player.position.Y = position.Y - 25;
             base.bulletCollision(bullet);
         }
+
+        public override void playerCollision(Player player)
+        {
+            //base.playerCollision(player);
+        }
     }
 }
