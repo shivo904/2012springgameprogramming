@@ -21,9 +21,9 @@ namespace SideScrollShooter
         public bool isDucking = false;
         Texture2D bloodImage;
         public Player(Texture2D textureImage,Texture2D bloodImage, Vector2 position,
-                   Point frameSize, int collisionOffset, Point currentFrame, Point sheetSize,
+                   Point frameSize, Vector2 collisionOffset, Point currentFrame, Point sheetSize,
                    Vector2 speed)
-            : base(textureImage, position, frameSize, 0, currentFrame,
+            :base(textureImage, position, frameSize, collisionOffset, currentFrame,
             sheetSize, speed)
         {
             bloodList = new List<AutomatedSprite>();

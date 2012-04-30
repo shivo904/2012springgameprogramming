@@ -11,7 +11,7 @@ namespace SideScrollShooter
         public Point frameSize;
         public Point currentFrame;
         Point sheetSize;
-        int collisionOffset;
+        protected Vector2 collisionOffset;
         int timeSinceLastFrame = 0;
         int millisecondsPerFrame;
         const int defaultMillisecondsPerFrame = 16;
@@ -19,14 +19,14 @@ namespace SideScrollShooter
         public Vector2 position;
 
         public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,
-            int collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed)
+            Vector2 collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed)
             : this(textureImage, position, frameSize, collisionOffset, currentFrame,
             sheetSize, speed, defaultMillisecondsPerFrame)
         {
         }
 
         public Sprite(Texture2D textureImage, Vector2 position, Point frameSize,
-            int collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed,
+            Vector2 collisionOffset, Point currentFrame, Point sheetSize, Vector2 speed,
             int millisecondsPerFrame)
         {
             this.textureImage = textureImage;
@@ -80,10 +80,10 @@ namespace SideScrollShooter
             get
             {
                 return new Rectangle(
-                    (int)position.X + collisionOffset,
-                    (int)position.Y + collisionOffset,
-                    frameSize.X - (collisionOffset * 2),
-                    frameSize.Y - (collisionOffset * 2));
+                    (int)position.X + (int)collisionOffset.X,
+                    (int)position.Y + (int)collisionOffset.Y,
+                    frameSize.X - ((int)collisionOffset.X * 2),
+                    frameSize.Y - ((int)collisionOffset.Y * 2));
             }
         }
 

@@ -9,13 +9,13 @@ namespace SideScrollShooter
 {
     class AutomatedSprite : Sprite
     {
-        public AutomatedSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset,
+        public AutomatedSprite(Texture2D textureImage, Vector2 position, Point frameSize, Vector2 collisionOffset,
              Point currentFrame, Point sheetSize, Vector2 speed)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed)
         {
         }
 
-        public AutomatedSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset,
+        public AutomatedSprite(Texture2D textureImage, Vector2 position, Point frameSize, Vector2 collisionOffset,
             Point currentFrame, Point sheetSize, Vector2 speed, int millisecondsPerFrame)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed, millisecondsPerFrame)
         {

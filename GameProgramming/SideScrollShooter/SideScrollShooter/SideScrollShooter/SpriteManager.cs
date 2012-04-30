@@ -91,10 +91,11 @@ namespace SideScrollShooter
             winImage = Game.Content.Load<Texture2D>(@"Images/Win");
             destructableImage = Game.Content.Load<Texture2D>(@"Images/Destructable");
             teleportImage = Game.Content.Load<Texture2D>(@"Images/Teleport");
-            SetLevel(levelNumber);
-            player = new Player(Game.Content.Load<Texture2D>(@"Images/Player"),bloodImage, new Vector2(Game.Window.ClientBounds.Width / 2, Game.Window.ClientBounds.Height - 150), new Point(19, 30), 0, new Point(0, 0), new Point(1, 1), new Vector2(10, 10));
+
+            player = new Player(Game.Content.Load<Texture2D>(@"Images/Player"), bloodImage, new Vector2(Game.Window.ClientBounds.Width / 2, Game.Window.ClientBounds.Height - 150), new Point(19, 30), Vector2.Zero, new Point(0, 0), new Point(1, 1), new Vector2(10, 10));
             blank = new Texture2D(Game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             blank.SetData(new[] { Color.White });
+            SetLevel(levelNumber);
             base.LoadContent();
         }
 
@@ -105,12 +106,16 @@ namespace SideScrollShooter
         }
         public void SetLevel(int levelNumber)
         {
+            WinBlock.hit = false;
+            player.dead = false;
+            blocks = new List<Block>();
+            enemies = new List<Enemy>();
             this.levelNumber = levelNumber;
-           
+
             StreamReader streamReader = new StreamReader("Content/testmap" + levelNumber + ".txt");
             String line;
             int yTile = 0;
-            blocks = new List<Block>();
+
 
             //converts the symbols into tiles for the level
             while ((line = streamReader.ReadLine()) != null)
@@ -145,9 +150,23 @@ namespace SideScrollShooter
         {
             // TODO: Add your update code here
             player.Update(gameTime, Game.Window.ClientBounds);
-            foreach (Enemy enemy in enemies)
+            for (int i = 0; i < enemies.Count;i++)
             {
-                enemy.Update(gameTime, Game.Window.ClientBounds);
+                enemies[i].Update(gameTime, Game.Window.ClientBounds);
+                if (enemies[i].collisionRect.Intersects(player.collisionRect))
+                {
+                    player.dead = true;
+                }
+
+                for (int j = 0; j < bulletList.Count; j++)
+                {
+                    if (bulletList[j].collisionRect.Intersects(enemies[i].collisionRect))
+                    {
+                        bulletList.RemoveAt(j);
+                        enemies.RemoveAt(i);
+                    }
+                }
+
             }
             foreach (Block block in blocks)
             {
@@ -166,7 +185,6 @@ namespace SideScrollShooter
                     }
                 }
             }
-            //collisionCheck(gameTime);
             Shooting(gameTime);
             if (checkFallBelow())
             {
@@ -195,7 +213,7 @@ namespace SideScrollShooter
             if (curMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton != curMouseState.LeftButton)
             {
                 Vector2 bulletSpeed = calcBulletSpeed(curMouseState);
-                bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), 0, Point.Zero, new Point(1, 1), bulletSpeed));
+                bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), Vector2.Zero, Point.Zero, new Point(1, 1), bulletSpeed));
             }
 
             prevMouseState = curMouseState;

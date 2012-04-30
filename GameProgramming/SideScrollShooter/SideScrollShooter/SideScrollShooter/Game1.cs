@@ -106,7 +106,7 @@ namespace SideScrollShooter
             {
                 Play();
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && spriteManager.Enabled==true)
             {
                 Restart();
             }
