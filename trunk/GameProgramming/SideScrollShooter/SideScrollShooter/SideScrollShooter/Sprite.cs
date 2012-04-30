@@ -13,7 +13,7 @@ namespace SideScrollShooter
         Point sheetSize;
         protected Vector2 collisionOffset;
         int timeSinceLastFrame = 0;
-        int millisecondsPerFrame;
+        protected int millisecondsPerFrame;
         const int defaultMillisecondsPerFrame = 16;
         public Vector2 speed;
         public Vector2 position;
