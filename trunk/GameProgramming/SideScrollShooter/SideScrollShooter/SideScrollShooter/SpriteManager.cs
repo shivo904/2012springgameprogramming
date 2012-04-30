@@ -151,7 +151,7 @@ namespace SideScrollShooter
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
-            player.Update(gameTime, Game.Window.ClientBounds);
+ 
             for (int i = 0; i < enemies.Count;i++)
             {
                 enemies[i].Update(gameTime, Game.Window.ClientBounds);
@@ -160,15 +160,19 @@ namespace SideScrollShooter
                     player.dead = true;
                 }
 
-                for (int j = 0; j < bulletList.Count; j++)
+                if (bulletList.Count != 0)
                 {
-                    if (bulletList[j].collisionRect.Intersects(enemies[i].collisionRect))
+                    for (int j = 0; j < bulletList.Count; j++)
                     {
-                        bulletList.RemoveAt(j);
-                        enemies.RemoveAt(i);
+
+                        if (bulletList[j].collisionRect.Intersects(enemies[i].collisionRect))
+                        {
+                            bulletList.RemoveAt(j);
+                            enemies.RemoveAt(i);
+                        }
                     }
                 }
-
+                player.Update(gameTime, Game.Window.ClientBounds);
             }
             foreach (Block block in blocks)
             {
@@ -215,7 +219,7 @@ namespace SideScrollShooter
             if (curMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton != curMouseState.LeftButton)
             {
                 Vector2 bulletSpeed = calcBulletSpeed(curMouseState);
-                bulletList.Add(new AutomatedSprite(bulletImage, player.position, new Point(5, 5), Vector2.Zero, Point.Zero, new Point(1, 1), bulletSpeed));
+                bulletList.Add(new AutomatedSprite(bulletImage, new Vector2(player.position.X+19,player.position.Y+15), new Point(5, 5), Vector2.Zero, Point.Zero, new Point(1, 1), bulletSpeed));
             }
 
             GamePadState curGamePadState = GamePad.GetState(PlayerIndex.One);
@@ -282,119 +286,7 @@ namespace SideScrollShooter
                 blood.Update(gameTime, Game.Window.ClientBounds);
             
         }
-
-
-
-
-
-
-
-        private void collisionCheck(GameTime gameTime)
-        {
- 
-            /*
-            for (int count = 0; count < destructibleTiles.Count; ++count)
-            {
-                //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-                for (int i = 0; i < bulletList.Count; ++i)
-                {
-                    Sprite s = bulletList[i];
-
-                    if (s.collisionRect.Intersects(destructibleTiles[count].collisionRect))
-                    {
-                        bulletList.RemoveAt(i);
-                        destructibleTiles.RemoveAt(count);
-                        --i;
-                        --count;
-                    }
-
-                }
-                count++;
-            }
-            foreach (AutomatedSprite destructibleT in destructibleTiles)
-            {
-                //treated like a ground tile
-                destructibleT.position.X -= 3F;
-                destructibleT.Update(gameTime, Game.Window.ClientBounds);
-
-                //check if player is on top of tile
-                if (player.collisionRect.Intersects(destructibleT.collisionRect) && player.collisionRect.Bottom >= destructibleT.collisionRect.Top && player.collisionRect.Bottom <= destructibleT.collisionRect.Bottom)
-                {
-                    player.isJumping = false;
-                    player.position.Y = destructibleT.position.Y - player.frameSize.Y;
-
-                }
-
-                //check if player is next to (on left of tile)
-                if (player.collisionRect.Intersects(destructibleT.collisionRect) && player.collisionRect.Right >= destructibleT.collisionRect.Left && player.collisionRect.Right <= destructibleT.collisionRect.Left + 5)
-                {
-                    player.position.X = destructibleT.position.X - player.frameSize.X;
-                }
-
-                if (player.collisionRect.Intersects(destructibleT.collisionRect) && player.collisionRect.Top <= destructibleT.collisionRect.Bottom && player.collisionRect.Top > destructibleT.collisionRect.Top)
-                {
-                    player.speed.Y = 0;
-                    player.position.Y = destructibleT.position.Y + destructibleT.frameSize.Y;
-                }
-
-                //If bullet touches a destructible tile, the tile is removed (replaced with air)
-
-                //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            
-            }
-            */
-            /*
-            for (int count = 0; count < teleportTiles.Count; ++count)
-            {
-
-
-                for (int i = 0; i < bulletList.Count; ++i)
-                {
-                    Sprite s = bulletList[i];
-
-                    if (s.collisionRect.Intersects(teleportTiles[count].collisionRect))
-                    {
-
-                        bulletList.RemoveAt(i);
-                        --i;
-
-                    }
-
-                }
-                count++;
-            }
-
-            foreach (AutomatedSprite teleportT in teleportTiles)
-            {
-                //treated like a ground tile
-                teleportT.position.X -= 3F;
-                teleportT.Update(gameTime, Game.Window.ClientBounds);
-
-                //check if player is on top of tile
-                if (player.collisionRect.Intersects(teleportT.collisionRect) && player.collisionRect.Bottom >= teleportT.collisionRect.Top && player.collisionRect.Bottom <= teleportT.collisionRect.Bottom)
-                {
-                    player.isJumping = false;
-                    player.position.Y = teleportT.position.Y - player.frameSize.Y;
-
-                }
-
-                //check if player is next to (on left of tile)
-                if (player.collisionRect.Intersects(teleportT.collisionRect) && player.collisionRect.Right >= teleportT.collisionRect.Left && player.collisionRect.Right <= teleportT.collisionRect.Left + 5)
-                {
-                    player.position.X = teleportT.position.X - player.frameSize.X;
-                }
-
-                if (player.collisionRect.Intersects(teleportT.collisionRect) && player.collisionRect.Top <= teleportT.collisionRect.Bottom && player.collisionRect.Top > teleportT.collisionRect.Top)
-                {
-                    player.speed.Y = 0;
-                    player.position.Y = teleportT.position.Y + teleportT.frameSize.Y;
-                }
-            }
-             * */
-
-        }
+           
         private bool checkPushLeft()
         {
             if (player.position.X <= 0)
