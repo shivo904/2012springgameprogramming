@@ -19,14 +19,14 @@ namespace SideScrollShooter
         public override void Update(GameTime gameTime, Rectangle clientBounds)
         {
 
-            if(aggroRect.Intersects(GameController.game.spriteManager.player.collisionRect))
+            if(!IsOutOfBounds(clientBounds))
             {
                 if (position.X+collisionOffset.X >= GameController.game.spriteManager.player.position.X)
                 {
-                    position.X -= 2F;
+                    position.X -= 3F;
                     speed.X -= .1F;
                 }
-                else if (position.X+collisionOffset.X < GameController.game.spriteManager.player.position.X)
+                if (position.X+collisionOffset.X < GameController.game.spriteManager.player.position.X)
                 {
                     position.X += 3F;
                     speed.X += .1F;
@@ -40,7 +40,7 @@ namespace SideScrollShooter
                 if (position.Y < GameController.game.spriteManager.player.position.Y)
                 {
                     position.Y += 2F;
-                    speed.Y += .1F;
+                    //speed.Y += .1F;
                 }
             }
                 
