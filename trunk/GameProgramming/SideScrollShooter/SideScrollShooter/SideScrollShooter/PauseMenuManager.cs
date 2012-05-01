@@ -71,16 +71,16 @@ namespace SideScrollShooter
         {
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
- 
 
 
-            if (keyboardState.IsKeyDown(Keys.Enter) || mouseState.LeftButton == ButtonState.Pressed)
+
+            if ((keyboardState.IsKeyDown(Keys.Enter) || mouseState.LeftButton == ButtonState.Pressed))
             {
-                if(menu[menuPosition]==play)
+                if (menu[menuPosition] == play && GameController.game.currentState != Game1.GameState.credits)
                 {
                     ((Game1)Game).Play();
                 }
-                if(menu[menuPosition]==restart) 
+                if (menu[menuPosition] == restart && GameController.game.currentState != Game1.GameState.credits) 
                 {
                     ((Game1)Game).Restart();
                     menuPosition = 0;

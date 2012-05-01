@@ -43,10 +43,11 @@ Content\Audio\hit.xnb
 Content\Audio\warp.xnb
 Content\Images\ToggleMusic.xnb
 Content\Images\StartScreen.xnb
+Content\Images\Credits.xnb
 Content\Audio\Sounds.xgs
 Content\Audio\Wave Bank.xwb
 Content\Audio\Sound Bank.xsb
+Content\testmap2.txt
 Content\testmap1.txt
 Content\testmap3.txt
 Content\emptymap.txt
-Content\testmap2.txt

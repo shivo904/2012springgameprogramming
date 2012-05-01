@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SideScrollShooter
 {
-    class AutomatedSprite : Sprite
+    public class AutomatedSprite : Sprite
     {
         public AutomatedSprite(Texture2D textureImage, Vector2 position, Point frameSize, Vector2 collisionOffset,
              Point currentFrame, Point sheetSize, Vector2 speed)

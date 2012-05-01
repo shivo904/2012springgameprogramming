@@ -41,7 +41,6 @@ namespace SideScrollShooter
         virtual public void bulletCollision(AutomatedSprite bullet)
         {
         }
-
         virtual public void playerCollision(Player player)
         {
             //check if player is on top of tile
@@ -62,6 +61,7 @@ namespace SideScrollShooter
             {
                 //player is on left of tile
                //ameController.game.Exit();
+                if(!player.dead)
                 player.currentFrame.X = 3;
                 player.position.X = position.X - player.frameSize.X;
                 player.isJumping = true; 
@@ -69,6 +69,7 @@ namespace SideScrollShooter
             else if(player.collisionRect.Left< collisionRect.Right && player.collisionRect.Left > collisionRect.Left)
             {
                 //player is to the right
+                if(!player.dead)
                 player.currentFrame.X = 3;
                 player.position.X =position.X+frameSize.X;
                 player.isJumping = true; 
