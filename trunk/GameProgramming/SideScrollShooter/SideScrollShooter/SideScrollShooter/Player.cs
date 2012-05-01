@@ -18,7 +18,6 @@ namespace SideScrollShooter
         private float minorSpeed = .05F;
         private float gravity = .2F;
         public bool isJumping = true;
-        public bool isDucking = false;
         Vector2 bloodDirection;
         Texture2D bloodImage;
         public Player(Texture2D textureImage,Texture2D bloodImage, Vector2 position,
@@ -160,7 +159,6 @@ namespace SideScrollShooter
                 currentFrame = new Point(0, 1);
                 sheetSize = new Point(1, 1);
                 frameSize = new Point(32, frameSize.Y);
-                currentFrame = new Point(0, 1);
                 GameController.game.pauseMenuManager.Enabled = true;
                 GameController.game.pauseMenuManager.Visible = true;
 

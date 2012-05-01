@@ -43,30 +43,32 @@ namespace SideScrollShooter
         }
         virtual public void playerCollision(Player player)
         {
-            //check if player is on top of tile
+            //check if player is below tile
             if (player.collisionRect.Bottom > collisionRect.Top && player.collisionRect.Bottom < collisionRect.Bottom)
             {
                 player.isJumping = false;
                 player.position.Y = position.Y - player.frameSize.Y;
 
             }
-            else if (player.collisionRect.Top < collisionRect.Top && player.collisionRect.Top > collisionRect.Bottom)
+            else if (player.collisionRect.Top <= collisionRect.Top && player.collisionRect.Top >= collisionRect.Bottom)
             {
                 //player hits bottom
                 player.speed.Y = 0;
                 player.position.Y = position.Y + frameSize.Y;
-                player.isJumping = true; 
+                player.isJumping = true;
             }
+
             else if (player.collisionRect.Right > collisionRect.Left && player.collisionRect.Right < collisionRect.Right)
-            {
+             {
                 //player is on left of tile
                //ameController.game.Exit();
                 if(!player.dead)
-                player.currentFrame.X = 3;
+                    player.currentFrame.X = 3;
                 player.position.X = position.X - player.frameSize.X;
                 player.isJumping = true; 
             }
-            else if(player.collisionRect.Left< collisionRect.Right && player.collisionRect.Left > collisionRect.Left)
+
+           else if(player.collisionRect.Left< collisionRect.Right && player.collisionRect.Left > collisionRect.Left)
             {
                 //player is to the right
                 if(!player.dead)
@@ -76,8 +78,13 @@ namespace SideScrollShooter
             }
             else
             {
-                player.isJumping = true; 
-            }
+                player.isJumping = true;
+           }
+
+
+
+
+
             //check if player is next to (on left of tile)
             
       
