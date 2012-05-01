@@ -56,7 +56,7 @@ namespace SideScrollShooter
                     {
                         millisecondsPerFrame = 100;
                     }
-                    if ((keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) && isJumping == false)
+                    if ((keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) && isJumping == false && !dead)
                     {
                         speed.Y = -50;
                         isJumping = true;
@@ -64,7 +64,7 @@ namespace SideScrollShooter
 
                     if (isJumping == true)
                     {
-                        if (keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick)) //chagne rate of falling based on if space is held down
+                        if (!dead && (keyboardState.IsKeyDown(Keys.Space) || gamepadState.IsButtonDown(Buttons.LeftStick))) //chagne rate of falling based on if space is held down
                             speed.Y += 2;
                         else
                         {
@@ -141,8 +141,8 @@ namespace SideScrollShooter
             {
               
             }
-
-            base.Update(gameTime, clientBounds);
+            if (!dead)
+                base.Update(gameTime, clientBounds);
         }
 
         public void kill()
@@ -150,14 +150,17 @@ namespace SideScrollShooter
 
             if (!dead)
             {
-                GameController.game.spriteManager.soundBank.PlayCue("hit");
+                GameController.game.soundBank.PlayCue("hit");
                 GameController.game.spriteManager.scrollSpeed = 0;
                 GameController.game.spriteManager.backgroundScrollSpeed = Vector2.Zero;
+                currentFrame = new Point(0, 1);
                 sheetSize = new Point(1, 1);
+                frameSize = new Point(32, frameSize.Y);
                 currentFrame = new Point(0, 1);
 
+
             }
-            
+
             dead = true;
 
             //position = new Vector2(position.X - GameController.game.spriteManager.scrollSpeed, position.Y);

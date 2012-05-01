@@ -24,7 +24,16 @@ namespace SideScrollShooter
         public PauseMenuManager pauseMenuManager;
         public LevelTransition levelTransition;
         public enum GameState { gamePlay, menu, startScreen };
+        GameState currentState;
+        Texture2D startImage;
         public Random rnd { get; private set; }
+
+
+        //Sounds
+        AudioEngine audioEngine;
+        WaveBank waveBank;
+        public SoundBank soundBank;
+        public Cue backgroundCue;
         public Game1()
         {
             GameController gameController = new GameController(this);
@@ -54,9 +63,10 @@ namespace SideScrollShooter
             pauseMenuManager.Enabled = false;
             levelTransition.Visible = false;
             levelTransition.Enabled = false;
-            Components.Add(spriteManager);
-            Components.Add(pauseMenuManager);
-            Components.Add(levelTransition);
+
+            currentState = GameState.startScreen;
+            
+
             base.Initialize();
         }
 
@@ -69,7 +79,11 @@ namespace SideScrollShooter
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mouseImage = Content.Load<Texture2D>(@"Images/crossair");
-
+            startImage = Content.Load<Texture2D>(@"Images/StartScreen"); audioEngine = new AudioEngine(@"Content\Audio\Sounds.xgs");
+            waveBank = new WaveBank(audioEngine, @"Content\Audio\Wave Bank.xwb");
+            soundBank = new SoundBank(audioEngine, @"Content\Audio\Sound Bank.xsb");
+            backgroundCue = soundBank.GetCue("backgroundMusic");
+            backgroundCue.Play();
             // TODO: use this.Content to load your game content here
         }
 
@@ -95,23 +109,38 @@ namespace SideScrollShooter
                 this.Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.P)&& spriteManager.Enabled==true)
-            {
-                spriteManager.Enabled = false;
-                //spriteManager.Visible = false;
-                pauseMenuManager.Enabled = true;
-                pauseMenuManager.Visible = true;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.B) && spriteManager.Enabled==false)
-            {
-                Play();
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.R) && spriteManager.Visible==true)
-            {
-                Restart();
-            }
-            // TODO: Add your update logic here
 
+            if (currentState != GameState.startScreen)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.P) && spriteManager.Enabled == true)
+                {
+
+                    spriteManager.Enabled = false;
+                    //spriteManager.Visible = false;
+                    pauseMenuManager.Enabled = true;
+                    pauseMenuManager.Visible = true;
+
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.B) && spriteManager.Enabled == false)
+                {
+                    Play();
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.R) && spriteManager.Visible == true)
+                {
+                    Restart();
+                }
+                // TODO: Add your update logic here
+            }
+            else
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    currentState = GameState.gamePlay;
+                    Components.Add(spriteManager);
+                    Components.Add(pauseMenuManager);
+                    Components.Add(levelTransition);
+                }
+            }
             base.Update(gameTime);
         }
         public void Play()
@@ -126,9 +155,11 @@ namespace SideScrollShooter
             pauseMenuManager.Visible = false;
             pauseMenuManager.Enabled = false;
             Components.Remove(spriteManager);
+            Components.Remove(pauseMenuManager);
             spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
             //spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
             Components.Add(spriteManager);
+            Components.Add(pauseMenuManager);
         }
         public void RestartGame()
         {
@@ -137,7 +168,9 @@ namespace SideScrollShooter
             Components.Remove(spriteManager);
             spriteManager = new SpriteManager(this);
             //spriteManager = new SpriteManager(this,spriteManager.getLevelNumber());
+            Components.Remove(pauseMenuManager);
             Components.Add(spriteManager);
+            Components.Add(pauseMenuManager);
         }
 
         /// <summary>
@@ -149,7 +182,11 @@ namespace SideScrollShooter
             //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin(SpriteSortMode.BackToFront,BlendState.Additive);
+            spriteBatch.Begin();
+
+            if (currentState == GameState.startScreen)
+                spriteBatch.Draw(startImage,new Rectangle(0,0,Window.ClientBounds.Width,Window.ClientBounds.Height),Color.White);
+
             spriteBatch.Draw(mouseImage, mousePos, Color.White);
             spriteBatch.End();
             base.Draw(gameTime);

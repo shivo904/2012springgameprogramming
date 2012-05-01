@@ -17,14 +17,17 @@ namespace SideScrollShooter
     /// </summary>
     public class PauseMenuManager: Microsoft.Xna.Framework.DrawableGameComponent
     {
+        Cue prevCue;
         int menuPosition;
         SpriteBatch spriteBatch;
         AutomatedSprite play;
         AutomatedSprite quit;
         AutomatedSprite restart;
         AutomatedSprite restartGame;
+        AutomatedSprite toggleMusic;
         List<AutomatedSprite> menu;
         KeyboardState prevKeyboardState;
+        MouseState prevMouseState;
         public PauseMenuManager(Game game)
             : base(game)
         {
@@ -48,13 +51,15 @@ namespace SideScrollShooter
             menuPosition = 0;
             menu = new List<AutomatedSprite>();
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
-            play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2,0),new Point(200,50),Vector2.Zero,Point.Zero,new Point(1,1),new Vector2(0,0));
-            restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/RestartLevel"), new Vector2(Game.Window.ClientBounds.Width / 2, 60), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), Vector2.Zero);
-            restartGame = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"), new Vector2(Game.Window.ClientBounds.Width / 2, 120), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
-            quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2, 180), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            play = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Continue"),new Vector2(Game.Window.ClientBounds.Width/2-100,20),new Point(200,50),Vector2.Zero,Point.Zero,new Point(1,1),new Vector2(0,0));
+            restart = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/RestartLevel"), new Vector2(Game.Window.ClientBounds.Width / 2-100, 80), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), Vector2.Zero);
+            restartGame = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Restart"), new Vector2(Game.Window.ClientBounds.Width / 2-100, 140), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            toggleMusic = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/ToggleMusic"), new Vector2(Game.Window.ClientBounds.Width / 2 - 100, 200), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
+            quit = new AutomatedSprite(Game.Content.Load<Texture2D>(@"Images/Quit"), new Vector2(Game.Window.ClientBounds.Width / 2-100, 260), new Point(200, 50), Vector2.Zero, Point.Zero, new Point(1, 1), new Vector2(0, 0));
             menu.Add(play);
             menu.Add(restart);
             menu.Add(restartGame);
+            menu.Add(toggleMusic);
             menu.Add(quit);
             base.LoadContent();
         }
@@ -66,25 +71,8 @@ namespace SideScrollShooter
         {
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
-            foreach(AutomatedSprite item in menu)
-            {
-                item.Update(gameTime, Game.Window.ClientBounds);
-                if (keyboardState.IsKeyDown(Keys.Down) && menuPosition<menu.Count-1 && keyboardState!=prevKeyboardState)
-                {
-                    menuPosition++;
-                }
-                if (keyboardState.IsKeyDown(Keys.Up) && menuPosition >0 && keyboardState!=prevKeyboardState)
-                {
-                    menuPosition--;
-                }
+ 
 
-                if (item.collisionRect.Intersects(new Rectangle(mouseState.X, mouseState.Y, 1, 1)))
-                {
-                    menuPosition = menu.IndexOf(item);
-                }
-                prevKeyboardState = keyboardState;
-            }
-            menu[menuPosition].currentFrame.X = 1;
 
             if (keyboardState.IsKeyDown(Keys.Enter) || mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -101,12 +89,46 @@ namespace SideScrollShooter
                 {
                     ((Game1)Game).RestartGame();
                 }
+                if (menu[menuPosition] == toggleMusic)
+                {
+                    if (keyboardState != prevKeyboardState || mouseState.LeftButton != prevMouseState.LeftButton)
+                    {
+                        if (GameController.game.backgroundCue.IsPaused)
+                            GameController.game.backgroundCue.Resume();
+                        else
+                            GameController.game.backgroundCue.Pause();
+                    }
+
+                }
                 if(menu[menuPosition]==quit)
                 {
                     Game.Exit();
                 }
+                prevKeyboardState = keyboardState;
+                prevMouseState = mouseState;
             }
 
+            foreach (AutomatedSprite item in menu)
+            {
+                item.Update(gameTime, Game.Window.ClientBounds);
+                if (keyboardState.IsKeyDown(Keys.Down) && menuPosition < menu.Count - 1 && keyboardState != prevKeyboardState)
+                {
+                    menuPosition++;
+                }
+                if (keyboardState.IsKeyDown(Keys.Up) && menuPosition > 0 && keyboardState != prevKeyboardState)
+                {
+                    menuPosition--;
+                }
+
+                if (item.collisionRect.Intersects(new Rectangle(mouseState.X, mouseState.Y, 1, 1)))
+                {
+                    menuPosition = menu.IndexOf(item);
+                }
+                prevKeyboardState = keyboardState;
+                prevMouseState = mouseState;
+
+            }
+            menu[menuPosition].currentFrame.X = 1;
             // TODO: Add your update code here
             /*
             play.Update(gameTime, Game.Window.ClientBounds);
@@ -145,20 +167,14 @@ namespace SideScrollShooter
             base.Update(gameTime);
         }
 
-        protected override void OnEnabledChanged(object sender, EventArgs args)
-        {
-            //if (Enabled)
-               // Game.IsMouseVisible = true;
-            if (!Enabled)
-                Game.IsMouseVisible = false;
-            base.OnEnabledChanged(sender, args);
-        }
+
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
             play.Draw(gameTime,spriteBatch);
             restart.Draw(gameTime, spriteBatch);
             restartGame.Draw(gameTime, spriteBatch);
+            toggleMusic.Draw(gameTime, spriteBatch);
             quit.Draw(gameTime,spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
