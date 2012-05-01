@@ -19,7 +19,7 @@ namespace SideScrollShooter
     {
         SpriteBatch spriteBatch;
         Texture2D background;
-        int levelCount =2;
+        int levelCount =8;
         public LevelTransition(Game game)
             : base(game)
         {

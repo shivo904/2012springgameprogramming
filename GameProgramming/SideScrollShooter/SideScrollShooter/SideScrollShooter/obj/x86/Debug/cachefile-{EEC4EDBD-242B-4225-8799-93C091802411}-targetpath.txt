@@ -48,6 +48,11 @@ Content\Audio\Sounds.xgs
 Content\Audio\Wave Bank.xwb
 Content\Audio\Sound Bank.xsb
 Content\testmap2.txt
-Content\testmap1.txt
-Content\testmap3.txt
+Content\testmap4.txt
 Content\emptymap.txt
+Content\testmap1.txt
+Content\testmap5.txt
+Content\testmap3.txt
+Content\testmap6.txt
+Content\testmap7.txt
+Content\testmap8.txt

@@ -97,7 +97,6 @@ C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollS
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Teleport.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Blood.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\emptymap.txt
-C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap3.txt
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Monster.xnb
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Monster.xnb
 C:\Users\Shadow\Desktop\GameDesign\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap3.txt
@@ -137,3 +136,9 @@ C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollS
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\Images\Credits.xnb
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap1.txt
 C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap2.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap4.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap3.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap5.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap6.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap7.txt
+C:\Users\michael\Documents\2012springgameprogramming\GameProgramming\SideScrollShooter\SideScrollShooter\SideScrollShooter\bin\x86\Debug\Content\testmap8.txt

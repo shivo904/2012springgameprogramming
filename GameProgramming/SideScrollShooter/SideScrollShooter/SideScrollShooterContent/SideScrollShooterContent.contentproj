@@ -111,10 +111,10 @@
   <ItemGroup>
     <None Include="testmap2.txt">
       <Name>testmap2</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="testmap3.txt">
-      <Name>testmap3</Name>
+    <None Include="testmap4.txt">
+      <Name>testmap4</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -342,7 +342,37 @@
   <ItemGroup>
     <None Include="testmap1.txt">
       <Name>testmap1</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testmap5.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Name>testmap5</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testmap3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Name>testmap3</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testmap6.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Name>testmap6</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testmap7.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Name>testmap7</Name>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="testmap8.txt">
+      <Name>testmap8</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
