@@ -17,7 +17,6 @@ namespace SideScrollShooter
     /// </summary>
     public class PauseMenuManager: Microsoft.Xna.Framework.DrawableGameComponent
     {
-        Cue prevCue;
         int menuPosition;
         SpriteBatch spriteBatch;
         AutomatedSprite play;

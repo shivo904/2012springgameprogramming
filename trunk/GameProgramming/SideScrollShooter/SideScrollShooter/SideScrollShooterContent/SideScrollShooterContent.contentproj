@@ -340,8 +340,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="testmap1.txt">
-      <Name>testmap1</Name>
+    <None Include="testmap1q.txt">
+      <Name>testmap1q</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -370,8 +370,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="testmap8.txt">
-      <Name>testmap8</Name>
+    <None Include="testmap1.txt">
+      <Name>testmap1</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
