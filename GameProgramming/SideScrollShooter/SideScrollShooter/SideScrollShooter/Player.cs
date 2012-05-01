@@ -11,7 +11,7 @@ namespace SideScrollShooter
     public class Player : Sprite
     {
         public bool dead;
-        List<AutomatedSprite> bloodList;
+        public List<AutomatedSprite> bloodList;
         private KeyboardState previousKeyboardState;
         private GamePadState previousGamePadState;
         private int continuousMovementSpeed = 0;
@@ -124,7 +124,7 @@ namespace SideScrollShooter
             }
             if (dead)
             {
-                bloodList.Add(new Blood(bloodImage,new Vector2(position.X+13,position.Y+5),bloodSpeed()));
+                bloodList.Add(new Blood(bloodImage,new Vector2(position.X+13,position.Y+10),bloodSpeed()));
             }
             position += direction;
 
@@ -136,6 +136,10 @@ namespace SideScrollShooter
                 minorSpeed = -.05F;
             if (position.X == clientBounds.Width / 2)
                 minorSpeed = 0F;
+            if (position.X+frameSize.X > clientBounds.Width)
+            {
+                position.X = clientBounds.Width-frameSize.X;
+            }
             
             if (position.Y > clientBounds.Height - frameSize.Y)
             {
@@ -157,6 +161,8 @@ namespace SideScrollShooter
                 sheetSize = new Point(1, 1);
                 frameSize = new Point(32, frameSize.Y);
                 currentFrame = new Point(0, 1);
+                GameController.game.pauseMenuManager.Enabled = true;
+                GameController.game.pauseMenuManager.Visible = true;
 
 
             }

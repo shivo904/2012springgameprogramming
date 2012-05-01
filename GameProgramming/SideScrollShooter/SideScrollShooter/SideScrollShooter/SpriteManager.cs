@@ -27,7 +27,6 @@ namespace SideScrollShooter
 
         //Lists for updating stuff
         List<AutomatedSprite> bulletList;
-        List<AutomatedSprite> bloodList;
         List<Block> blocks;
         List<Enemy> enemies;
         MouseState prevMouseState;
@@ -84,7 +83,7 @@ namespace SideScrollShooter
             blocks = new List<Block>();
             enemies = new List<Enemy>();
             bulletList = new List<AutomatedSprite>();
-            bloodList = new List<AutomatedSprite>();
+  
 
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
            
@@ -94,7 +93,7 @@ namespace SideScrollShooter
             flyerImage = Game.Content.Load<Texture2D>(@"Images/Monster");
             bulletImage = Game.Content.Load<Texture2D>(@"Images/bullet");
             bloodImage = Game.Content.Load<Texture2D>(@"Images/Blood");
-            blockImage = Game.Content.Load<Texture2D>(@"Images/blockcolors/BlockB");
+            blockImage = Game.Content.Load<Texture2D>(@"Images/blockcolors/BlockGr");
             spikeImage = Game.Content.Load<Texture2D>(@"Images/Spike");
             winImage = Game.Content.Load<Texture2D>(@"Images/Win");
             destructableImage = Game.Content.Load<Texture2D>(@"Images/blockcolors/breakable1");
@@ -114,40 +113,43 @@ namespace SideScrollShooter
         }
         public void SetLevel(int levelNumber)
         {
-            WinBlock.hit = false;
-            player.dead = false;
-            blocks = new List<Block>();
-            enemies = new List<Enemy>();
-            this.levelNumber = levelNumber;
+        
+                WinBlock.hit = false;
+                player.dead = false;
+                blocks = new List<Block>();
+                enemies = new List<Enemy>();
+                this.levelNumber = levelNumber;
 
-            StreamReader streamReader = new StreamReader("Content/testmap" + levelNumber + ".txt");
-            String line;
-            int yTile = 0;
+                StreamReader streamReader = new StreamReader("Content/testmap" + levelNumber + ".txt");
+                String line;
+                int yTile = 0;
 
 
-            //converts the symbols into tiles for the level
-            while ((line = streamReader.ReadLine()) != null)
-            {
-                for (int xTile = 0; xTile < line.Length; xTile++)
+                //converts the symbols into tiles for the level
+                while ((line = streamReader.ReadLine()) != null)
                 {
-                    
-                    if (line[xTile] == '#')
-                        blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 30, yTile * 30)));
-                    else if (line[xTile] == '^')
-                        blocks.Add(new Spike(spikeImage, new Vector2(xTile *30, yTile * 30)));
-                    else if (line[xTile] == '!')
-                        blocks.Add(new WinBlock(winImage, new Vector2(xTile * 30, yTile * 30)));
-                    else if (line[xTile] == 'x')
-                        blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 30, yTile * 30)));
-                    else if (line[xTile] == '?')
-                        blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 30, yTile * 30)));
-                    else if (line[xTile] == 'Q')
-                        enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 30, yTile * 30)));
-                        
+                    for (int xTile = 0; xTile < line.Length; xTile++)
+                    {
 
+                        if (line[xTile] == '#')
+                            blocks.Add(new GroundBlock(blockImage, new Vector2(xTile * 30, yTile * 30)));
+                        else if (line[xTile] == '^')
+                            blocks.Add(new Spike(spikeImage, new Vector2(xTile * 30, yTile * 30)));
+                        else if (line[xTile] == '!')
+                            blocks.Add(new WinBlock(winImage, new Vector2(xTile * 30, yTile * 30)));
+                        else if (line[xTile] == 'x')
+                            blocks.Add(new DestructableBlock(destructableImage, new Vector2(xTile * 30, yTile * 30)));
+                        else if (line[xTile] == '?')
+                            blocks.Add(new TeleportBlock(teleportImage, new Vector2(xTile * 30, yTile * 30)));
+                        else if (line[xTile] == 'Q')
+                            enemies.Add(new FlyingEnemy(flyerImage, new Vector2(xTile * 30, yTile * 30)));
+
+
+                    }
+                    yTile++;
                 }
-                yTile++;
-            }
+           
+
         }
 
 
@@ -198,6 +200,22 @@ namespace SideScrollShooter
                         block.bulletCollision(bulletList[i]);
                         bulletList.RemoveAt(i);
                     }
+                }
+
+
+                for (int j = 0; j < player.bloodList.Count; j++)
+                {
+                    if (block.collisionRect.Intersects(player.bloodList[j].collisionRect))
+                    {
+                        
+                        player.bloodList[j].speed = Vector2.Zero;
+                    }
+
+                    if (player.bloodList.Count > 200)
+                    {
+                        player.bloodList.RemoveAt(0);
+                    }
+
                 }
             }
             if(!player.dead)
@@ -295,12 +313,7 @@ namespace SideScrollShooter
 
         
         
-        private void deathBlood(GameTime gameTime)
-        {
-            foreach (AutomatedSprite blood in bloodList)
-                blood.Update(gameTime, Game.Window.ClientBounds);
-            
-        }
+  
            
         private bool checkPushLeft()
         {
@@ -342,8 +355,7 @@ namespace SideScrollShooter
             foreach (Enemy enemy in enemies)
                 enemy.Draw(gameTime, spriteBatch);
 
-            foreach (AutomatedSprite blood in bloodList)
-                blood.Draw(gameTime, spriteBatch); 
+       
             spriteBatch.Draw(GameController.game.mouseImage, GameController.game.mousePos, Color.White);
 
             base.Draw(gameTime);

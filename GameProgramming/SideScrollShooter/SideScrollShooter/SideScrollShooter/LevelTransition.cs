@@ -19,6 +19,7 @@ namespace SideScrollShooter
     {
         SpriteBatch spriteBatch;
         Texture2D background;
+        int levelCount =2;
         public LevelTransition(Game game)
             : base(game)
         {
@@ -50,15 +51,25 @@ namespace SideScrollShooter
         public override void Update(GameTime gameTime)
         {
             // TODO: Add your update code here
-            if(Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (GameController.game.spriteManager.getLevelNumber() < levelCount)
             {
-                Visible = false;
-                Enabled = false;
-                ((Game1)Game).spriteManager.Visible=true;
-                ((Game1)Game).spriteManager.Enabled=true;
-                ((Game1)Game).spriteManager.NextLevel();
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    Visible = false;
+                    Enabled = false;
+                    ((Game1)Game).spriteManager.Visible = true;
+                    ((Game1)Game).spriteManager.Enabled = true;
+                    ((Game1)Game).spriteManager.NextLevel();
 
 
+                }
+            }
+            else
+            {
+                this.Visible = false;
+                
+                GameController.game.currentState = Game1.GameState.credits;
+                this.Enabled = false;
             }
             base.Update(gameTime);
         }

@@ -23,9 +23,10 @@ namespace SideScrollShooter
         public SpriteManager spriteManager;
         public PauseMenuManager pauseMenuManager;
         public LevelTransition levelTransition;
-        public enum GameState { gamePlay, menu, startScreen };
-        GameState currentState;
+        public enum GameState { gamePlay, menu, startScreen,credits };
+        public GameState currentState;
         Texture2D startImage;
+        Texture2D winImage;
         public Random rnd { get; private set; }
 
 
@@ -79,6 +80,7 @@ namespace SideScrollShooter
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             mouseImage = Content.Load<Texture2D>(@"Images/crossair");
+            winImage = Content.Load<Texture2D>(@"Images/credits");
             startImage = Content.Load<Texture2D>(@"Images/StartScreen"); audioEngine = new AudioEngine(@"Content\Audio\Sounds.xgs");
             waveBank = new WaveBank(audioEngine, @"Content\Audio\Wave Bank.xwb");
             soundBank = new SoundBank(audioEngine, @"Content\Audio\Sound Bank.xsb");
@@ -107,12 +109,10 @@ namespace SideScrollShooter
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                this.Exit();
 
-            if (currentState != GameState.startScreen)
+            if (currentState != GameState.startScreen && currentState != GameState.credits)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.P) && spriteManager.Enabled == true)
+                if ((Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape)) && spriteManager.Enabled == true)
                 {
 
                     spriteManager.Enabled = false;
@@ -131,7 +131,7 @@ namespace SideScrollShooter
                 }
                 // TODO: Add your update logic here
             }
-            else
+            else if (currentState == GameState.startScreen)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
@@ -139,6 +139,14 @@ namespace SideScrollShooter
                     Components.Add(spriteManager);
                     Components.Add(pauseMenuManager);
                     Components.Add(levelTransition);
+                }
+            }
+            else
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+
+                    Exit();
                 }
             }
             base.Update(gameTime);
@@ -186,6 +194,8 @@ namespace SideScrollShooter
 
             if (currentState == GameState.startScreen)
                 spriteBatch.Draw(startImage,new Rectangle(0,0,Window.ClientBounds.Width,Window.ClientBounds.Height),Color.White);
+            if (currentState == GameState.credits)
+                spriteBatch.Draw(winImage, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White); ;
 
             spriteBatch.Draw(mouseImage, mousePos, Color.White);
             spriteBatch.End();
