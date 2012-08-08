@@ -1,3 +1,7 @@
+Content\Audio\shooting.xnb
+Content\Audio\backgroundMusic.xnb
+Content\Audio\hit.xnb
+Content\Audio\warp.xnb
 Content\Images\Player.xnb
 Content\Images\Continue.xnb
 Content\Images\Quit.xnb
@@ -14,7 +18,6 @@ Content\Images\Teleport.xnb
 Content\Images\Blood.xnb
 Content\Images\Monster.xnb
 Content\Images\Walkingman.xnb
-Content\Audio\shooting.xnb
 Content\Images\background1.xnb
 Content\Images\blockcolors\BlockB.xnb
 Content\Images\blockcolors\BlockB2.xnb
@@ -38,9 +41,6 @@ Content\Images\blockcolors\blockT2.xnb
 Content\Images\blockcolors\blockY.xnb
 Content\Images\blockcolors\blockY2.xnb
 Content\Images\blockcolors\breakable1.xnb
-Content\Audio\backgroundMusic.xnb
-Content\Audio\hit.xnb
-Content\Audio\warp.xnb
 Content\Images\ToggleMusic.xnb
 Content\Images\StartScreen.xnb
 Content\Images\Credits.xnb
@@ -50,9 +50,8 @@ Content\Audio\Sound Bank.xsb
 Content\testmap2.txt
 Content\testmap4.txt
 Content\emptymap.txt
-Content\testmap1.txt
 Content\testmap5.txt
 Content\testmap3.txt
 Content\testmap6.txt
 Content\testmap7.txt
-Content\testmap8.txt
+Content\testmap1.txt
