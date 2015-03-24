@@ -1,0 +1,1 @@
+This is for our final project in game programming. We are making a 2d side scroller.
